@@ -1,12 +1,12 @@
 
-import { getPostById } from "@/lib/resolveMarkdown";
+import { getBlogBySlug } from "@/lib/resolveMarkdown";
 import "./styles.css";
 
 export const revalidate = 60;
 export default async function Page(props: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ slug: string }>;
 }) {
-  const blog  = await getPostById(decodeURI(props.params.id) as string);
+  const blog  = await getBlogBySlug(decodeURI(props.params.slug) as string);
 
   return (
     <div id="m-mdcontent">

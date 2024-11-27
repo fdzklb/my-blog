@@ -11,10 +11,10 @@ export const GITHUB_PAGE = "https://github.com/fdzklb";
 export const SOURCE_CODE_GITHUB_PAGE = "https://github.com/fdzklb";
 
 /** 掘金个人页 */
-// export const JUEJIN_PAGE = "https://juejin.cn/user/2647279733052494";
+// export const JUEJIN_PAGE = "https://juejin.cn/user/26472791733052494";
 
 /** B站个人页 */
-// export const BILIBILI_PAGE = "https://space.bilibili.com/315542317";
+// export const BILIBILI_PAGE = "https://space.bilibili.com/3155442317";
 
 /** 网站名称 */
 export const WEBSITE = `${NICKNAME}`;

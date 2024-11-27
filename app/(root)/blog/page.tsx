@@ -1,11 +1,11 @@
 import { Wrapper } from "@/components/wrapper";
-import { getSortedPostData } from "@/lib/resolveMarkdown";
+import { getSortedBlogsMetaData } from "@/lib/resolveMarkdown";
 import { BlogList } from "@/components/blog/blog-list";
 
 
 export const revalidate = 60;
 export default async function Page() {
-  const blogLists = await getSortedPostData();
+  const blogLists = await getSortedBlogsMetaData();
   
   return (
     <Wrapper className="flex min-h-screen flex-col px-6 pb-24 pt-8">

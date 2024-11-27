@@ -12,6 +12,8 @@ import { navItems } from "./config";
 import { MobileNav } from "./mobile-nav";
 
 import { IconBrandGithub } from "../icons";
+import { Languages } from "lucide-react";
+
 import { Logo } from "../logo";
 import { NextLink } from "../next-link";
 import { Button } from "../ui/button";
@@ -92,8 +94,12 @@ export const Navbar = () => {
               <IconBrandGithub className="text-base" />
             </Button>
           </Link>
+          <Button variant="outline" size={"icon"} aria-label="后台管理">
+            <Languages className="size-4" />
+          </Button>
         </div>
       </div>
+
     </header>
   );
 };

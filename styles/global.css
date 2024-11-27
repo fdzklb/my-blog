@@ -59,7 +59,7 @@
 
 @font-face {
   font-family: "Gilroy";
-  src: url("/public/fonts/Gilroy-Extrabold.woff2") format("woff2");
+  src: url("/fonts/Gilroy-Extrabold.woff2") format("woff2");
   font-weight: 800;
   font-style: normal;
 }

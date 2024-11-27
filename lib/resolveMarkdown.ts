@@ -12,50 +12,62 @@ import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
 import rehypePrettyCode from "rehype-pretty-code";
 
-export const getSortedPostData = async () => {
-  const postsDirectory = path.join(process.cwd(), "blogLists");
-  const postNames = await fsPromises.readdir(postsDirectory);
-  const allPostsData = postNames
+const blogs = {
+  blogsDir: "blogLists",
+};
+
+// 获取排序后的所有文章数据的metaData
+export const getSortedBlogsMetaData = async (blogsDir = blogs.blogsDir) => {
+  const blogsDirectory = path.join(process.cwd(), blogsDir);
+  const blogNames = await fsPromises.readdir(blogsDirectory);
+  const allblogsData = blogNames
     .filter((name) => name !== ".DS_Store") // mac电脑会出现.DS_Store, remove /DS_Store
     .map((name) => {
-      // 去除文件名的md后缀，使其作为文章id使用
-      const id = name.replace(".md", "");
-      const mdContent = fs.readFileSync(path.join(postsDirectory, name), {
+      // 去除文件名的md后缀，使文件名作为文章id使用
+      const slug = name.replace(".md", "");
+      const mdContent = fs.readFileSync(path.join(blogsDirectory, name), {
         encoding: "utf-8",
       });
-      // use gray-matter to parse the post metadata section
+      // use gray-matter to parse the blog metadata section
       const matterData = matter(mdContent);
+      const { date, bgImgPath, title, description, tags } = matterData.data;
       return {
-        id,
-        ...matterData.data,
-        date: matterData.data.date,
+        slug,
+        date,
+        bgImgPath,
+        title,
+        description,
+        tags,
       };
     });
   // 按照日期从近到远排序
-  return allPostsData.sort(({ date: a }, { date: b }) => {
+  return allblogsData.sort(({ date: a }, { date: b }) => {
     const timeA = new Date(a);
     const timeB = new Date(b);
     return timeB.getTime() - timeA.getTime();
   });
 };
 
-// 获取格式化后的所有文章id（文件名）
-export const getAllIds = async () => {
-  const postPath = path.join(process.cwd(), "blogLists");
-  const postNames = await fsPromises.readdir(postPath);
-  return postNames
+
+
+
+// 获取所有文章id
+export const getAllSlug = async (blogsDir = blogs.blogsDir) => {
+  const blogPath = path.join(process.cwd(), blogsDir);
+  const blogNames = await fsPromises.readdir(blogPath);
+  return blogNames
     .filter((name) => name != ".DS_Store")
     .map((name) => ({
       params: {
-        id: name.replace(".md", ""),
+        slug: name.replace(".md", ""),
       },
     }));
 };
 
 // 通过文章id获取文章内容
-export const getPostById = async (id: string) => {
-  const postPath = path.join(process.cwd(), "blogLists", `${id}.md`);
-  const mdContent = await fsPromises.readFile(path.join(postPath), {
+export const getBlogBySlug = async (slug: string, blogsDir = blogs.blogsDir) => {
+  const blogPath = path.join(process.cwd(), blogsDir, `${slug}.md`);
+  const mdContent = await fsPromises.readFile(path.join(blogPath), {
     encoding: "utf-8",
   });
   // 使用matter解析markdown元数据和内容
@@ -68,11 +80,11 @@ export const getPostById = async (id: string) => {
     })
     .use(rehypeStringify)
     .process(matterData.content);
-  const htmlContent = content.value;
   return {
-    id,
+    slug,
     date: dayjs(matterData.data.date, "LLLL d, yyyy"),
     title: matterData.data.title,
-    htmlContent,
+    htmlContent: content.value,
+    description: matterData.data.description,
   };
 };
