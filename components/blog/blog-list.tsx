@@ -7,9 +7,9 @@ export type BlogType = {
   bgImgPath: string;
   title: string;
   description: string;
-  id: string;
-  tags: string[];
+  tags: string;
   date: string;
+  slug: string;
 }
 
 type BlogListProps = {
@@ -32,7 +32,7 @@ export const BlogList = ({ blogs }: BlogListProps) => {
     <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-10">
       {blogs.map((el, idx) => (
         <li
-          key={el.id}
+          key={el.slug}
           className="animate-fade-up animate-ease-in-out"
           style={{
             animationDelay: `${(idx + 1) * 200}ms`,

@@ -3,28 +3,19 @@ import Link from "next/link";
 import { Calendar } from "lucide-react";
 import Image from "next/image";
 import { BlogType } from "./blog-list";
-import { PATHS } from "@/constants";
+import { PATHS, tagColor } from "@/constants";
+
 
 
 type BlogListItemProps = {
   blog: BlogType;
 };
 
-const tagColor = {
-  科技: "bg-cyan-500",
-  经济: "bg-fuchsia-500",
-  JavaScript: "bg-indigo-500",
-  旅行: "bg-[#75d1fa]",
-  思考: "bg-[#9273f9]",
-  前端: "bg-[#757c72]",
-  新闻: "bg-[#50d71e]",
-  生活: "bg-[#fcc31f]",
-};
-
 export const BlogListItem = ({ blog }: BlogListItemProps) => {
+  const tags = blog.tags?.split(",") || [];
   return (
     <Link
-      href={`${PATHS.SITE_BLOG}/${blog.id}`}
+      href={`${PATHS.SITE_BLOG}/${blog.slug}`}
       className="group"
       target="_blank"
     >
@@ -46,7 +37,7 @@ export const BlogListItem = ({ blog }: BlogListItemProps) => {
         </p>
         <div className="flex justify-between align-middle text-sm text-slate-500">
           <div className="space-x-2 flex">
-            {blog.tags.map((tagName: string) => (
+            {tags.map((tagName: string) => (
               <div
                 key={tagName}
                 className={`flex items-center px-2 py-1 rounded-sm font-semibold text-xs/[6px] text-center text-white shadow-sm ${tagColor[tagName]}`}

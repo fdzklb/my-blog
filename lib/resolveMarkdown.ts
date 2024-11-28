@@ -49,8 +49,6 @@ export const getSortedBlogsMetaData = async (blogsDir = blogs.blogsDir) => {
 };
 
 
-
-
 // 获取所有文章id
 export const getAllSlug = async (blogsDir = blogs.blogsDir) => {
   const blogPath = path.join(process.cwd(), blogsDir);
@@ -82,8 +80,9 @@ export const getBlogBySlug = async (slug: string, blogsDir = blogs.blogsDir) => 
     .process(matterData.content);
   return {
     slug,
-    date: dayjs(matterData.data.date, "LLLL d, yyyy"),
+    date: matterData.data.date,
     title: matterData.data.title,
+    tags: matterData.data.tags,
     htmlContent: content.value,
     description: matterData.data.description,
   };
