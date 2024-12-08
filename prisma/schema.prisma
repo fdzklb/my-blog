@@ -37,5 +37,5 @@ model Comment {
   email       String   @unique // 评论者邮箱，设置为唯一
   content     String   @db.VarChar(1000)   // 评论内容，限制最大1000字符
   created_at  DateTime @default(now()) // 评论创建时间
-  blog        Blog     @relation(fields: [blogId], references: [id]) // 关联到Blog表
+  blog        Blog     @relation(fields: [slug], references: [id]) // 关联到Blog表
 }
