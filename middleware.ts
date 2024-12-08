@@ -11,7 +11,7 @@ function getLocale(request: NextRequest) {
   const acceptLanguage = request.headers.get('accept-language');
   if (!acceptLanguage) {
     // 如果没有 "accept-language" 字段，返回默认语言
-    return 'en-US';
+    return 'en';
   }
   // 将 "accept-language" 字段按逗号分隔，并提取语言代码
   const languages = acceptLanguage.split(',').map(lang => lang.split(';')[0]);
@@ -23,7 +23,7 @@ function getLocale(request: NextRequest) {
     }
   }
   // 如果没有匹配的语言，返回默认语言
-  return 'en-US';
+  return 'en';
 }
  
 export function middleware(request: NextRequest) {
@@ -48,7 +48,7 @@ export function middleware(request: NextRequest) {
   const locale = getLocale(request)
   request.nextUrl.pathname = `/${locale}${pathname}`
   // e.g. incoming request is /products
-  // The new URL is now /en-US/products
+  // The new URL is now /en/products
   return NextResponse.redirect(request.nextUrl)
 }
  

@@ -7,7 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import "@/styles/global.css";
 
 export async function generateStaticParams() {
-  return [{ lang: "en-US" }, { lang: "zh" }];
+  return [{ lang: "en" }, { lang: "zh" }];
 }
 
 export default async function RootLayout({
