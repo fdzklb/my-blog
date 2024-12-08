@@ -1,27 +1,22 @@
 import Link from "next/link";
 import { Button, buttonVariants } from "@/components/ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-
-import { NICKNAME, PATHS } from "@/constants";
 import { TypeIntro } from "@/features/home";
 import { cn } from "@/lib/utils";
+import { SocialMediaList } from "./social-media";
+import { getDictionary } from '@/app/(root)/dictionaries'
 
-import { socialMediaList } from "./social-media";
 
-export const HeroSection = () => {
+export const HeroSectionZH = async () => {
+  const dict = await getDictionary('zh')
+  
   let delay = 0;
-
   // 每次调用，增加延时
   const getDelay = () => (delay += 200);
 
   return (
     <div className="flex min-h-full max-w-screen-md flex-col justify-center gap-5 px-6 md:px-10 2xl:max-w-7xl">
       <p
-        className="animate-fade-up text-2xl tracking-widest animate-ease-in-out lg:text-5xl"
+        className="animate-fade-up text-2xl tracking-widest animate-ease-in-out lg:text-4xl"
         style={{
           animationDelay: `${getDelay()}ms`,
         }}
@@ -30,7 +25,7 @@ export const HeroSection = () => {
       </p>
       <strong
         className={cn(
-          `text-5xl md:text-8xl tracking-widest font-black  bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500`,
+          `text-5xl md:text-6xl tracking-widest font-black  bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500`,
           "animate-fade-up animate-ease-in-out",
         )}
         style={{
@@ -38,7 +33,7 @@ export const HeroSection = () => {
           animationDelay: `${getDelay()}ms`,
         }}
       >
-        {NICKNAME}
+        {dict.info.nickname}
       </strong>
       <div
         className={cn("animate-fade-up animate-ease-in-out")}
@@ -46,8 +41,8 @@ export const HeroSection = () => {
           animationDelay: `${getDelay()}ms`,
         }}
       >
-        <TypeIntro />
-      </div>
+        <TypeIntro lang="zh"/>
+        </div>
       <p
         className={cn(
           "text-2xl md:text-5xl tracking-widest",
@@ -80,40 +75,19 @@ export const HeroSection = () => {
         }}
       >
         <Link
-          href={PATHS.SITE_BLOG}
+          href={dict.paths.site_blog.link}
           className={cn(buttonVariants({ variant: "outline" }))}
         >
           我的博客
         </Link>
         <Link
-          href={PATHS.SITE_ABOUT}
+          href={dict.paths.site_about.link}
           className={cn(buttonVariants({ variant: "outline" }))}
         >
           关于我
         </Link>
       </div>
-
-      <ul
-        className={cn("flex space-x-4", "animate-fade-up animate-ease-in-out")}
-        style={{
-          animationDelay: `${getDelay()}ms`,
-        }}
-      >
-        {socialMediaList.map((el) => (
-          <li key={el.link}>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button asChild variant="outline" size="icon">
-                  <Link href={el.link} target="_blank">
-                    {el.icon}
-                  </Link>
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>{el.label}</TooltipContent>
-            </Tooltip>
-          </li>
-        ))}
-      </ul>
+      <SocialMediaList lang="zh" delay={delay} />
     </div>
   );
 };

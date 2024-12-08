@@ -1,3 +1,4 @@
 export * from "./type-intro";
-export * from "./hero-section";
+export * from "./hero-sectionZH";
+export * from "./hero-sectionEN";
 export * from "./social-media";

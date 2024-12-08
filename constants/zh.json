@@ -1,0 +1,62 @@
+{
+  "info": {
+    "nickname": "方达达",
+    "email": "fangdada160@gmail.com",
+    "github_page": "https://github.com/fdzklb",
+    "source_code_github_page": "https://github.com/fdzklb",
+    "bilibili": "https://space.bilibili.com/368992483",
+    "zhihu": "https://www.zhihu.com/people/fang-tong-xue-25-62",
+    "twitter": "https://x.com/fang_dada9138",
+    "juejin": "https://juejin.cn/user/3350967174044222",
+    "gitee": "https://gitee.com/Leo-dazhenfang",
+    "slogan": "努力做一个更好的程序员"
+  },
+
+  "paths": {
+    "site_home": { "link": "/zh", "label": "首页", "description": "首页" },
+    "site_portfolio": {
+      "link": "/zh/portfolio",
+      "label": "作品集",
+      "description": "记录我了我这些年工作中开发(使用到)的一些小东西～"
+    },
+    "site_blog": {
+      "link": "/zh/blog",
+      "label": "博客",
+      "description": "这里记录了我的想法、文章，希望和大家一起交流～"
+    },
+    "site_category": {
+      "link": "/zh/categories",
+      "label": "博客分类",
+      "show": false,
+      "description": "分类包含前端、思考、生活、杂项等等～"
+    },
+    "site_about": {
+      "link": "/zh/about",
+      "label": "关于",
+      "description": "叮～ 你有一份关于${nickname}的简介，请查收～"
+    }
+  },
+
+  "categories": {
+    "前端": {
+      "href": "/zh/categories/前端",
+      "color": "bg-cyan-500",
+      "description": "Learn React.js and Next.js in a simple to understand articles"
+    },
+    "思考": {
+      "href": "/zh/categories/思考",
+      "color": "bg-[#9273f9]",
+      "description": "Learn what are new in the javascript world"
+    },
+    "生活": {
+      "color": "bg-[#fcc31f]",
+      "href": "/zh/categories/生活",
+      "description": "Everything about CSS and the new features."
+    },
+    "杂项": {
+      "color": "bg-[#50d71e]",
+      "href": "/zh/categories/杂项",
+      "description": "Everything about CSS and the new features."
+    }
+  }
+}

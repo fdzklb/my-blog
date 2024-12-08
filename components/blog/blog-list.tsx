@@ -7,22 +7,23 @@ export type BlogType = {
   bgImgPath: string;
   title: string;
   description: string;
-  tags: string;
+  categories: string;
   date: string;
   slug: string;
 }
 
 type BlogListProps = {
   blogs: BlogType[];
+  lang: string;
 };
 
-export const BlogList = ({ blogs }: BlogListProps) => {
+export const BlogList = async ({ blogs, lang }: BlogListProps) => {
   if (!blogs.length) {
     return (
       <div className="grid place-content-center gap-8">
         <IllustrationNoContent className="size-[30vh]" />
         <h3 className="text-center text-2xl font-semibold tracking-tight">
-          暂无Blog
+          Empty
         </h3>
       </div>
     );
@@ -38,7 +39,7 @@ export const BlogList = ({ blogs }: BlogListProps) => {
             animationDelay: `${(idx + 1) * 200}ms`,
           }}
         >
-          <BlogListItem blog={el} />
+          <BlogListItem blog={el} lang={lang} />
         </li>
       ))}
     </ul>

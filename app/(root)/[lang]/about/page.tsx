@@ -33,13 +33,17 @@ import {
   IconSkillTypeScript,
 } from "@/components/icons";
 
-import { NICKNAME } from "@/constants";
-import { socialMediaList } from "@/features/home";
-
+import { SocialMediaList } from "@/features/home";
+import { getDictionary } from "@/app/(root)/dictionaries";
 export const revalidate = 60;
 
-export default function Page() {
+export default async function Page({ params }: { params: { lang: string } }) {
+  const { lang } = await params
+  const dict = await getDictionary(lang)
   let delay = 0;
+
+  const userInfo = {
+  }
 
   // 每次调用，增加延时
   const getDelay = () => (delay += 200);
@@ -56,8 +60,8 @@ export default function Page() {
         >
           <h2>我是谁</h2>
           <p>
-            Hi~ 我是{NICKNAME}
-            ，一名前端开发工程师，2020年大专毕业，喜欢 Coding 和打游戏
+            Hi~ 我是{dict.info.nickname}
+            ，一名前端开发工程师，2019年本科毕业，喜欢 Coding 和打游戏
           </p>
         </div>
 
@@ -225,15 +229,7 @@ export default function Page() {
           <h2>联系我</h2>
           <p>你可以通过👇下面任意一种方式联系我</p>
           <ul className="!mb-0 flex !list-none items-center space-x-4 !pl-0">
-            {socialMediaList.map((el) => (
-              <li key={el.link}>
-                <Button asChild variant="outline" size="icon">
-                  <Link href={el.link} target="_blank">
-                    {el.icon}
-                  </Link>
-                </Button>
-              </li>
-            ))}
+            <SocialMediaList lang={lang} delay={0} />
           </ul>
         </div>
       </section>

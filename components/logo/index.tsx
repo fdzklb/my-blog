@@ -1,24 +1,24 @@
 import * as React from "react";
-
-import { ImageAssets, WEBSITE } from "@/constants";
+import { ImageAssets } from "@/constants";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
+// import { getDictionary } from '@/app/(root)/dictionaries'
 
 type Props = {
   className?: string;
 };
 
-export const Logo = ({ className }: Props) => {
+export const Logo = async ({ className }: Props) => {
   return (
     <>
-      <img
-        src={ImageAssets.logoLight}
-        className={cn("w-8 h-8 hidden dark:block", className)}
-        alt={WEBSITE}
-      />
-      <img
+      <Image
         src={ImageAssets.logoDark}
-        className={cn("w-8 h-8 dark:hidden", className)}
-        alt={WEBSITE}
+        alt="Logo"
+        width={32}
+        height={32}
+        className={cn("w-8 h-8", className)}
+        // 添加这个属性可以优化加载
+        priority={true}
       />
     </>
   );

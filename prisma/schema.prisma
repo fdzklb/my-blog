@@ -21,11 +21,21 @@ model Blog {
   view_count  Int       @default(1)
   date        String
   description String
-  tags        String
+  categories        String
+  comments    Comment[] // 一篇博客可以有多条评论
 }
 
 model Subscriber {
   id              Int     @id @default(autoincrement())
   email           String  @unique
   is_subscribed   Boolean @default(true)
+}
+
+model Comment {
+  id          Int      @id @default(autoincrement())
+  name        String   @db.VarChar(10) // 评论者姓名，限制最大10个字符
+  email       String   @unique // 评论者邮箱，设置为唯一
+  content     String   @db.VarChar(1000)   // 评论内容，限制最大1000字符
+  created_at  DateTime @default(now()) // 评论创建时间
+  blog        Blog     @relation(fields: [blogId], references: [id]) // 关联到Blog表
 }

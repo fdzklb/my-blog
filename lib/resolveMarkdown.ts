@@ -17,10 +17,10 @@ const blogs = {
 };
 
 // 获取排序后的所有文章数据的metaData
-export const getSortedBlogsMetaData = async (blogsDir = blogs.blogsDir) => {
+export const getSortedBlogsMetaData = async (category = '', blogsDir = blogs.blogsDir) => {
   const blogsDirectory = path.join(process.cwd(), blogsDir);
   const blogNames = await fsPromises.readdir(blogsDirectory);
-  const allblogsData = blogNames
+  let allblogsData = blogNames
     .filter((name) => name !== ".DS_Store") // mac电脑会出现.DS_Store, remove /DS_Store
     .map((name) => {
       // 去除文件名的md后缀，使文件名作为文章id使用
@@ -30,16 +30,21 @@ export const getSortedBlogsMetaData = async (blogsDir = blogs.blogsDir) => {
       });
       // use gray-matter to parse the blog metadata section
       const matterData = matter(mdContent);
-      const { date, bgImgPath, title, description, tags } = matterData.data;
+      const { date, bgImgPath, title, description, categories } = matterData.data;
       return {
         slug,
         date,
         bgImgPath,
         title,
         description,
-        tags,
+        categories,
       };
     });
+  
+  // 如果传入了分类，则只返回该分类下的文章
+  if(category) {
+    allblogsData = allblogsData.filter((blog) => blog.categories.split(',')?.includes(category));
+  }
   // 按照日期从近到远排序
   return allblogsData.sort(({ date: a }, { date: b }) => {
     const timeA = new Date(a);
@@ -82,7 +87,7 @@ export const getBlogBySlug = async (slug: string, blogsDir = blogs.blogsDir) => 
     slug,
     date: matterData.data.date,
     title: matterData.data.title,
-    tags: matterData.data.tags,
+    categories: matterData.data.categories,
     htmlContent: content.value,
     description: matterData.data.description,
   };

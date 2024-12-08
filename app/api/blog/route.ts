@@ -3,7 +3,7 @@ export async function GET() {
   try {
     const data = await db.blog.findMany({
       take: 10,
-      select: { title: true, tags: true, slug: true, description: true },
+      select: { title: true, categories: true, slug: true, description: true },
       orderBy: [{ view_count: "desc" }],
     });
 
@@ -15,7 +15,7 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const { slug, title, tags, description, date } = await request.json();
+  const { slug, title, categories, description, date } = await request.json();
 
   try {
     const existingPost = await db.blog.findUnique({
@@ -36,7 +36,7 @@ export async function POST(request: Request) {
           title,
           description,
           date,
-          tags,
+          categories,
         },
       });
     }

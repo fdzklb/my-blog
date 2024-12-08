@@ -6,7 +6,7 @@ import { useEffect } from "react";
 export default function ReportViews({
   slug,
   title,
-  tags,
+  categories,
   date,
   description,
   suffix,
@@ -14,7 +14,7 @@ export default function ReportViews({
   slug: string;
   title: string;
   description: string;
-  tags: string;
+  categories: string;
   suffix: string;
   date: string;
 }) {
@@ -26,13 +26,13 @@ export default function ReportViews({
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ slug, title, tags, description, date }),
+          body: JSON.stringify({ slug, title, categories, description, date }),
         });
       } catch (error) {
         console.log("Something is up...", error);
       }
     };
     postData();
-  }, [tags, slug, title, description, date]);
+  }, [categories, slug, title, description, date]);
   return <></>;
 }

@@ -1,21 +1,11 @@
 import type { Metadata } from "next";
 import * as React from "react";
-import { NICKNAME, SLOGAN, WEBSITE } from "@/constants";
 import "@/styles/global.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
-export const metadata: Metadata = {
-  title: {
-    template: `%s - ${WEBSITE}`,
-    default: `${WEBSITE}`,
-  },
-  description: `${SLOGAN}`,
-  keywords: NICKNAME,
-};
-
 export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
-    <html suppressHydrationWarning lang="zh-CN">
+    <html suppressHydrationWarning>
       <head>
         <link
           rel="apple-touch-icon"

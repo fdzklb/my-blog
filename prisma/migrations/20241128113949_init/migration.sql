@@ -6,7 +6,7 @@ CREATE TABLE "Blog" (
     "view_count" INTEGER NOT NULL DEFAULT 1,
     "date" TEXT NOT NULL,
     "description" TEXT NOT NULL,
-    "tags" TEXT NOT NULL,
+    "categories" TEXT NOT NULL,
 
     CONSTRAINT "Blog_pkey" PRIMARY KEY ("id")
 );

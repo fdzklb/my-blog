@@ -13,7 +13,7 @@ export default {
     "./src/**/*.{ts,tsx}",
     "./lib/**/*.{ts,tsx}",
   ],
-
+  safelist: ["bg-cyan-500", "bg-[#9273f9]", "bg-[#fcc31f]", "bg-[#50d71e]"],
   theme: {
     screens: {
       sm: "640px",

@@ -1,0 +1,56 @@
+{
+  "info": {
+    "nickname": "Leo Fang",
+    "email": "fangdada160@gmail.com",
+    "github_page": "https://github.com/fdzklb",
+    "source_code_github_page": "https://github.com/fdzklb",
+    "bilibili": "https://space.bilibili.com/368992483",
+    "zhihu": "https://www.zhihu.com/people/fang-tong-xue-25-62",
+    "twitter": "https://x.com/fang_dada9138",
+    "juejin": "https://juejin.cn/user/3350967174044222",
+    "gitee": "https://gitee.com/Leo-dazhenfang",
+    "slogan": "Striving to be a better programmer"
+  },
+
+  "paths": {
+    "site_home": { "link": "/en", "label": "Home", "description": "Home" },
+    "site_portfolio": {
+      "link": "/en/portfolio",
+      "label": "Portfolio",
+      "description": "A collection of small projects I've developed and used over the years at work~"
+    },
+    "site_blog": {
+      "link": "/en/blog",
+      "label": "Blog",
+      "description": "Here I share my thoughts and articles, hoping to exchange ideas with everyone~"
+    },
+    "site_about": {
+      "link": "/en/about",
+      "label": "About",
+      "description": "Ding~ You have received an introduction about ${nickname}, please check~"
+    }
+  },
+
+  "categories": {
+    "Frontend": {
+      "href": "/en/categories/frontend",
+      "color": "bg-cyan-500",
+      "description": "Learn React.js and Next.js in a simple to understand articles"
+    },
+    "Thoughts": {
+      "href": "/en/categories/thoughts",
+      "color": "bg-[#9273f9]",
+      "description": "Learn what are new in the javascript world"
+    },
+    "Life": {
+      "color": "bg-[#fcc31f]",
+      "href": "/en/categories/life",
+      "description": "Everything about CSS and the new features."
+    },
+    "Misc": {
+      "color": "bg-[#50d71e]",
+      "href": "/en/categories/misc",
+      "description": "Everything about CSS and the new features."
+    }
+  }
+}
