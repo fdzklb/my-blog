@@ -24,7 +24,7 @@ export default async function RootLayout({
         <TooltipProvider>
           <>
             <Navbar lang={lang} />
-            <main className="min-h-[calc(100vh-190px)]">{children}</main>
+            <main className="min-h-[calc(100vh-64px)]">{children}</main>
             {/* <Footer lang={params.lang} /> */}
             <BackToTop />
           </>

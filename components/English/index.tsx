@@ -28,6 +28,10 @@ const English = ({ data }: DataType) => {
       if (e.key === "ArrowDown") {
         setNext();
       }
+      // 如果是空格键，显示英文
+      if (e.key === " ") {
+        setVisible((v) => !v);
+      }
     });
     return () => {
       window.removeEventListener("keydown", () => {});
@@ -66,7 +70,7 @@ const English = ({ data }: DataType) => {
 
 
   return (
-    <Wrapper className="flex min-h-screen flex-col px-6 pt-16 items-center space-y-4">
+    <Wrapper className="flex flex-col px-6 pt-16 items-center space-y-4 h-full">
       <p className="text-lg">{randomItem?.chinese}</p>
       <Input autoFocus />
       <div>{randomItem?.tip}</div>
@@ -77,12 +81,18 @@ const English = ({ data }: DataType) => {
         {visible ? randomItem?.english : "点击显示"}
         {visible ? <span onClick={(e) => { e.stopPropagation(); speak() }}>🔊</span> : null}
       </div>
-      <Button className="w-full" onClick={setRadom}>
-        随机-&gt;
-      </Button>
-      <Button className="w-full" onClick={setNext}>
-        下一句
-      </Button>
+      <div className="bottom-20 fixed md:relative w-full space-y-4">
+        <Button className="w-full block lg:hidden" onClick={() => setVisible(v => !v)}>
+          { visible ? "隐藏原文" : "显示原文" }
+        </Button>
+        <Button className="w-full" onClick={setRadom}>
+          随机-&gt;
+        </Button>
+        <Button className="w-full" onClick={setNext}>
+          下一句
+        </Button>
+      </div>
+
     </Wrapper>
   );
 };

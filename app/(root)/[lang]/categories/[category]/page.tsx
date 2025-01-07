@@ -19,7 +19,7 @@ export default async function Page(props: {
   const blogs = await getSortedBlogsMetaData(decodeURI(category) as string);
 
   return (
-    <Wrapper className="flex min-h-screen flex-col px-6 pb-24 pt-8">
+    <Wrapper className="flex flex-col px-6 pb-24 pt-8">
       <h2 className="pb-8 text-3xl font-bold md:text-4xl">{decodeURI(category)}</h2>
       <BlogList blogs={blogs} lang={lang} />
     </Wrapper>

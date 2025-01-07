@@ -11,7 +11,7 @@ export default async function Page({ params }: { params: { lang: string } }) {
   const blogLists = lang === 'zh' ? await getSortedBlogsMetaData() : []
   
   return (
-    <Wrapper className="flex min-h-screen flex-col px-6 pb-24 pt-8">
+    <Wrapper className="flex flex-col px-6 pb-24 pt-8">
       <h2 className="pb-8 text-3xl font-bold md:text-4xl">{lang === 'zh' ? '最新文章' : 'Latest Articles'}</h2>
       <BlogList blogs={blogLists} lang={lang} />
     </Wrapper>
