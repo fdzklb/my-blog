@@ -2,7 +2,7 @@
 
 import * as React from "react";
 // import data from './jsons/all_files.json';
-import English from "@/components/English";
+import English from "@/components/English/index1";
 
 export default function Page() {
   return (
