@@ -17,6 +17,18 @@ const ImportWords = ({ addWords }: { addWords: Function }) => {
   const [name, setName] = useState<string>("");
   const [wordsStr, setWordsStr] = useState<string>("");
 
+  // 处理导入的txt文件
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const text = e.target?.result as string;
+      setWordsStr(text);
+    };
+    reader.readAsText(file);
+  };
+
   const onWordsStrChange = (str: string) => {
     if(str.startsWith('~!@##@!~')) {
       setName(str.split('~!@##@!~')[1]);
@@ -87,9 +99,15 @@ const ImportWords = ({ addWords }: { addWords: Function }) => {
       <DialogTrigger asChild>
         <div className="cursor-pointer text-blue-500">+ 导入单词</div>
       </DialogTrigger>
-      <DialogContent className="max-w-full h-screen">
+      <DialogContent className="max-w-full h-[90vh]">
         <DialogTitle>导入单词</DialogTitle>
         <div className="flex flex-col space-y-4 py-4">
+          <div className="flex items-center gap-4">
+            <Label htmlFor="name" className="text-right">
+              导入txt
+            </Label>
+            <Input className="w-60" id="picture" type="file" onChange={handleFileChange} />
+          </div>
           <div className="flex items-center gap-4">
             <Label htmlFor="name" className="text-right">
               分类名称
