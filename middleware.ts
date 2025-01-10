@@ -33,7 +33,9 @@ export function middleware(request: NextRequest) {
     request.nextUrl.pathname.startsWith('/images/') ||
     request.nextUrl.pathname.startsWith('/fonts/') ||
     request.nextUrl.pathname.startsWith('/_next/') ||
-    request.nextUrl.pathname.includes('/api/')
+    request.nextUrl.pathname.includes('/api/') || 
+    request.nextUrl.pathname.includes('/favicon.ico') ||
+    request.nextUrl.pathname.includes('/english')
   ) {
     return NextResponse.next()
   }
@@ -55,6 +57,6 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     // 排除静态文件和特定路径
-    '/((?!api|_next|images|fonts|favicon.ico).*)',
+    '/((?!api|_next|images|fonts|favicon.ico|english).*)',
   ]
 }

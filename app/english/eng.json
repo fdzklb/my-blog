@@ -17,7 +17,7 @@
   },
   "2": {
     "chinese": "这是我妹妹奥利维亚她十岁了,她上四年级\r",
-    "english": "This my sister Olivia, who is 10, she is in the forth grade\r\nNiece 侄女/外甥女\r\nNephew 侄子/外甥\r",
+    "english": "This my sister Olivia, who is 10, she is in the forth grade\r<br>Niece 侄女/外甥女\r<br>Nephew 侄子/外甥\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -265,7 +265,7 @@
   },
   "33": {
     "chinese": "他们退休了,所以他们通常会去很多露营车旅行,他们喜欢在大自然中度过尽可能多的时间\r",
-    "english": "这就是他们如此健康和精力充沛的原因\r\nThey are retired, so they have usually go on lots of camper van trips. They enjoy spending as much as time as possible in nature. That’s why they are so healthy and energetic\r",
+    "english": "这就是他们如此健康和精力充沛的原因\r<br>They are retired, so they have usually go on lots of camper van trips. They enjoy spending as much as time as possible in nature. That’s why they are so healthy and energetic\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -329,7 +329,7 @@
   },
   "41": {
     "chinese": "在冬天,许多游客来这里滑雪和单板滑雪,滑雪是我最喜欢的运动之一\r",
-    "english": "In winter, many tourists come here for skiing and snowboard. Skiing(滑雪) is one of my favorite sports, too.\r\nI like skiing, badminton, tennis, swimming, mountain climbing and cycling\r",
+    "english": "In winter, many tourists come here for skiing and snowboard. Skiing(滑雪) is one of my favorite sports, too.\r<br>I like skiing, badminton, tennis, swimming, mountain climbing and cycling\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -337,7 +337,7 @@
   },
   "42": {
     "chinese": "村子上面也有一个小景点,游客也来参观我们村\r",
-    "english": "There is small ski resort(旅游胜地) above the village. The tourists come and visit our village, too.\r\n中国著名的旅游景区\r",
+    "english": "There is small ski resort(旅游胜地) above the village. The tourists come and visit our village, too.\r<br>中国著名的旅游景区\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -393,7 +393,7 @@
   },
   "49": {
     "chinese": "You can reach so easily everywhere with the subway.\r",
-    "english": "With the development of China's high-speed railway, you can reach most places in China within 10 hours\r\nReach 到达\r\nArrive at/in 到达具体的地方\r",
+    "english": "With the development of China's high-speed railway, you can reach most places in China within 10 hours\r<br>Reach 到达\r<br>Arrive at/in 到达具体的地方\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -433,7 +433,7 @@
   },
   "54": {
     "chinese": "我喜欢纽约,因为到处都是美味的食物,这么多地方和美食可以尝试\r",
-    "english": "I like New York, because there is so much great food, everywhere. So many places and cuisines /kwɪˈzinz/ to try. \r\nCuisine 菜肴\r",
+    "english": "I like New York, because there is so much great food, everywhere. So many places and cuisines /kwɪˈzinz/ to try. \r<br>Cuisine 菜肴\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -489,7 +489,7 @@
   },
   "61": {
     "chinese": "你好,欢迎来到我的家乡,我住在哥本哈根,它是丹麦的首都,我住在市区的一套四室公寓里,和我的父母和两个兄弟姐妹在一起,\r",
-    "english": "Hello, welcome to my hometown. I live in Copenhagen, which is the capital of Denmark.\r\nI live downtown in a 4-room flat with my parents and my two siblings.\r",
+    "english": "Hello, welcome to my hometown. I live in Copenhagen, which is the capital of Denmark.\r<br>I live downtown in a 4-room flat with my parents and my two siblings.\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -513,14 +513,14 @@
   },
   "64": {
     "chinese": "我喜欢热闹的街道,挤满了人,还有这么多商店,咖啡馆,街头小吃摊,我认为它的魅力来自于一个小城市的感觉\r",
-    "english": "I enjoy the lively streets full of people and so many shops, cafes, street food stands.\r\nI think its charm comes from the feeling of a “small city”.\r",
+    "english": "I enjoy the lively streets full of people and so many shops, cafes, street food stands.\r<br>I think its charm comes from the feeling of a “small city”.\r",
     "count": 0,
     "remember": false,
     "tip": "",
     "lastShowTime": "2025-01-06T17:29:09.498Z"
   },
   "65": {
-    "chinese": "哥本哈根是一个海边城市，我经常和我爸爸一起坐船，这很有乐趣\r",
+    "chinese": "哥本哈根是一个海边城市，所以经常我喜欢我爸爸一起坐船，这很有乐趣\r",
     "english": "Copenhagen is a city by the sea, so I like taking a boat ride with my dad pretty often. I have so much fun.\r",
     "count": 0,
     "remember": false,
@@ -529,7 +529,7 @@
   },
   "66": {
     "chinese": "我出生在湖北省西南部的一个小村庄，在那里我度过了我的童年和完成了我的小学。\r",
-    "english": "I was born in a small village situated in the southwest part of Hubei Province, where I spent my childhood and completed my primary school.\r\njunior high school 初中\r\nsenior high school 高中\r",
+    "english": "I was born in a small village situated in the southwest part of Hubei Province, where I spent my childhood and completed my primary school.\r<br>junior high school 初中\r<br>senior high school 高中\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -577,7 +577,7 @@
   },
   "72": {
     "chinese": "过去近9年我一直在武汉，武汉是湖北的省会，坐落在中国的中部。\r",
-    "english": "I have been in Wuhan for the past 9 years. Wuhan, located in the middle of China, is the capital of Hubei province. \r\n世界第三大河流长江从武汉丛间穿过，因此得益于优秀的地理条件，这座城市在2000年前就被建立了。\r\nThe Yangtze River, the world's third largest river, runs through Wuhan. Thanks to its excellent geographical conditions, the city was established 2000 years ago.\r",
+    "english": "I have been in Wuhan for the past 9 years. Wuhan, located in the middle of China, is the capital of Hubei province. \r<br>世界第三大河流长江从武汉丛间穿过，因此得益于优秀的地理条件，这座城市在2000年前就被建立了。\r<br>The Yangtze River, the world's third largest river, runs through Wuhan. Thanks to its excellent geographical conditions, the city was established 2000 years ago.\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -593,7 +593,7 @@
   },
   "74": {
     "chinese": "气候：武汉气候四季分明.\r",
-    "english": "Wuhan has four distinct seasons.\r\n夏天温度高到三十多度，随着全球气候变暖，近些年夏天最高气温超过40摄氏度。\r\nThe temperature in summer is more than 30 degrees Celsius/ˈselsiəs/, With the global warming, the highest temperature in summer in recent years is more than 40. \r",
+    "english": "Wuhan has four distinct seasons.\r<br>夏天温度高到三十多度，随着全球气候变暖，近些年夏天最高气温超过40摄氏度。\r<br>The temperature in summer is more than 30 degrees Celsius/ˈselsiəs/, With the global warming, the highest temperature in summer in recent years is more than 40. \r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -617,7 +617,7 @@
   },
   "77": {
     "chinese": "最舒服的月份是4月和10月左右。温度适宜，没有蚊虫，非常适合户外活动。\r",
-    "english": "The most comfortable time in Wuhan are around April and October, The temperature is suitable and there are no mosquitoes. It is very suitable for outdoor activities. \r\n特点 characteristic\r",
+    "english": "The most comfortable time in Wuhan are around April and October, The temperature is suitable and there are no mosquitoes. It is very suitable for outdoor activities. \r<br>特点 characteristic\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -665,7 +665,7 @@
   },
   "83": {
     "chinese": "首先恭喜你通过了我们的职业测试，你做的很好\r",
-    "english": "First I’d like to congratulate you on passing aptitude test, you did very well\r\nCongratulate somebody on something\r\nCongratulation\r",
+    "english": "First I’d like to congratulate you on passing aptitude test, you did very well\r<br>Congratulate somebody on something\r<br>Congratulation\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -681,7 +681,7 @@
   },
   "85": {
     "chinese": "Hear of 听说\r",
-    "english": "Your father will be happy to hear of this remarkable improvement\r\nNot hear of 不被允许 不答应\r\nHe wouldn't hear of my walking home alone\r\nWe had to hear about the whole journey from beginning to end.\r\n从头到尾 自始至终\r\nFrom beginning to end\r",
+    "english": "Your father will be happy to hear of this remarkable improvement\r<br>Not hear of 不被允许 不答应\r<br>He wouldn't hear of my walking home alone\r<br>We had to hear about the whole journey from beginning to end.\r<br>从头到尾 自始至终\r<br>From beginning to end\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -697,7 +697,7 @@
   },
   "87": {
     "chinese": "我点击了它，然后进到了你公司的网站，然后申请了岗位\r",
-    "english": "I clicked on it and it brought me to you company website, where I applied for it \r\nI saw the job posting on the recruitment application, and then I clicked on it to learn about some information about your company before applying for this position\r",
+    "english": "I clicked on it and it brought me to you company website, where I applied for it \r<br>I saw the job posting on the recruitment application, and then I clicked on it to learn about some information about your company before applying for this position\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -705,7 +705,7 @@
   },
   "88": {
     "chinese": "了解，到目前为止你了解我公司多少？\r",
-    "english": "Makes sense, what do you know about the company so far？\r\nIt all makes sense now 现在全说得通了\r\nLearn about 了解\r\nThe program offers an ideal opportunity for students to learn about foreign culture.\r",
+    "english": "Makes sense, what do you know about the company so far？\r<br>It all makes sense now 现在全说得通了\r<br>Learn about 了解\r<br>The program offers an ideal opportunity for students to learn about foreign culture.\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -721,7 +721,7 @@
   },
   "90": {
     "chinese": "I can tell from the pictures and testimonials(奖状，推荐信) on the website that you do great, quality work\r",
-    "english": "从...了解到\r\nYes we always try to do quality work\r\nThe software products we build help many brands transform their businesses\r",
+    "english": "从...了解到\r<br>Yes we always try to do quality work\r<br>The software products we build help many brands transform their businesses\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -737,7 +737,7 @@
   },
   "92": {
     "chinese": "但是我马上意识到我不适合这个工作，于是我决定换行业\r",
-    "english": "But I soon realized I wasn’t cut out for that job, and decided to move to a different industry\r\nCut out for 合适(优点天赋的含义)\r\nHe is cut out for a football player.\r\nI'm really cut out for this work 胜任\r",
+    "english": "But I soon realized I wasn’t cut out for that job, and decided to move to a different industry\r<br>Cut out for 合适(优点天赋的含义)\r<br>He is cut out for a football player.\r<br>I'm really cut out for this work 胜任\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -745,7 +745,7 @@
   },
   "93": {
     "chinese": "Suitable\r",
-    "english": "I'm still not suitable to be a teacher\r\nAppropriate  inappropriate  acceptable\r",
+    "english": "I'm still not suitable to be a teacher\r<br>Appropriate  inappropriate  acceptable\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -761,7 +761,7 @@
   },
   "95": {
     "chinese": "是什么让你做这么一个勇敢的的职业转换\r",
-    "english": "What determined you to make such a bold career shift\r\nBold 勇敢的 冒险的\r\nbrave and confident; not afraid to say what you feel or to take risks\r",
+    "english": "What determined you to make such a bold career shift\r<br>Bold 勇敢的 冒险的\r<br>brave and confident; not afraid to say what you feel or to take risks\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -833,7 +833,7 @@
   },
   "104": {
     "chinese": "这是一个很好的机会，在这个公司我可以充分发挥我的技能和经验\r",
-    "english": "It was a good chance to join a team\r\nI’ve been able to use my training and experience fully at this company\r",
+    "english": "It was a good chance to join a team\r<br>I’ve been able to use my training and experience fully at this company\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -913,7 +913,7 @@
   },
   "114": {
     "chinese": "你的优点是什么？我的优点是坚持和勇气，我尽全力实现我的目标，不管一路上遇到什么困难\r",
-    "english": "What are you strengths?\r\nMy strengths are persistence and courage, I give my all to achieve my goal in spite of any hardships I might encounter along the way\r",
+    "english": "What are you strengths?\r<br>My strengths are persistence and courage, I give my all to achieve my goal in spite of any hardships I might encounter along the way\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -921,7 +921,7 @@
   },
   "115": {
     "chinese": "I have a hard-working nature\r",
-    "english": "I am always looking for a way to improve and grow\r\nI am also a great team player\r",
+    "english": "I am always looking for a way to improve and grow\r<br>I am also a great team player\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -929,7 +929,7 @@
   },
   "116": {
     "chinese": "你能举个例子吗，你是怎么扮演团队合作者的？如果我完成了我自己的任务我总是尽力帮助队友完成他们的任务\r",
-    "english": "Can you provide an example of how you acted as a team player?\r\nI always tried to help my teammates complete their tasks if I had completed mine\r",
+    "english": "Can you provide an example of how you acted as a team player?\r<br>I always tried to help my teammates complete their tasks if I had completed mine\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -945,7 +945,7 @@
   },
   "118": {
     "chinese": "为了团队和公司的成功，我愿意尽一切可能\r",
-    "english": "I am willing to do whatever it takes for the team or company to succeed\r\nwhatever it takes 不惜一切代价 尽一切可能\r\nBe willing to do 愿意\r",
+    "english": "I am willing to do whatever it takes for the team or company to succeed\r<br>whatever it takes 不惜一切代价 尽一切可能\r<br>Be willing to do 愿意\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -953,7 +953,7 @@
   },
   "119": {
     "chinese": "在团队里你和某些人相处不好，你会怎么做\r",
-    "english": "Great! So... what would you do if you didn’t get on with someone on you team\r\nGet on with sb 和某人友好相处\r",
+    "english": "Great! So... what would you do if you didn’t get on with someone on you team\r<br>Get on with sb 和某人友好相处\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -961,7 +961,7 @@
   },
   "120": {
     "chinese": "我会尽力冷静和理性的理清事情，我会为了团队尽力和他人友好相处\r",
-    "english": "I would try to sort things out in a calm and rational manner\r\nRational manner 合理的方式 manner 方式 态度\r\nI would do my best to get on with that person for the sake of the team\r\nFor the sake of 为了...起见\r\nShe gave up smoking for the sake of her health\r",
+    "english": "I would try to sort things out in a calm and rational manner\r<br>Rational manner 合理的方式 manner 方式 态度\r<br>I would do my best to get on with that person for the sake of the team\r<br>For the sake of 为了...起见\r<br>She gave up smoking for the sake of her health\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -969,7 +969,7 @@
   },
   "121": {
     "chinese": "你的缺点是什么？我可能有点太直接，有时会伤害到别人\r",
-    "english": "What are your weaknesses?\r\nI can be a bit too straightforward at times and sometimes that hurts people\r\nCan be a bit 难免有点 有点\r\nAt times 有时\r\nWhen I need to speak to many people, I may appear unconfident, possibly because I care about others' evaluations, but I’m working on this and try to focus more on myself\r",
+    "english": "What are your weaknesses?\r<br>I can be a bit too straightforward at times and sometimes that hurts people\r<br>Can be a bit 难免有点 有点\r<br>At times 有时\r<br>When I need to speak to many people, I may appear unconfident, possibly because I care about others' evaluations, but I’m working on this and try to focus more on myself\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -977,7 +977,7 @@
   },
   "122": {
     "chinese": "但是我正为此努力，我尽力避免自己太直接\r",
-    "english": "But I’m working on this, and try to stop myself from being overly direct\r\nWork on 努力改进\r\nOverly 过于\r",
+    "english": "But I’m working on this, and try to stop myself from being overly direct\r<br>Work on 努力改进\r<br>Overly 过于\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -1001,7 +1001,7 @@
   },
   "125": {
     "chinese": "我希望能够得到机会去领导一些项目\r",
-    "english": "I hope to be offered the opportunity to take the lead on some projects\r\nThere are definitely promotion opportunities at our company\r\nDepending on your achievements and expertise\r",
+    "english": "I hope to be offered the opportunity to take the lead on some projects\r<br>There are definitely promotion opportunities at our company\r<br>Depending on your achievements and expertise\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -1009,7 +1009,7 @@
   },
   "126": {
     "chinese": "你在压力下工作得好吗？通常我不会恐慌，我会尽力自控\r",
-    "english": "Do you work well under pressure?\r\nUsually I don’t panic and manage to maintain self-control\r",
+    "english": "Do you work well under pressure?\r<br>Usually I don’t panic and manage to maintain self-control\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -1017,7 +1017,7 @@
   },
   "127": {
     "chinese": "在我之前的工作中我曾有很多紧急的deadlines和充满压力的情形。我总会投入额外的时间尽力满足客户需求。我总是高质量工作并且尊重deadlines\r",
-    "english": "There were many tight deadlines and stressful situations at my precious jobs\r\nI always put in extra hours and did my best in meeting the needs of the clients\r\nI’ve always delivered high quality work and respected my deadlines\r",
+    "english": "There were many tight deadlines and stressful situations at my precious jobs\r<br>I always put in extra hours and did my best in meeting the needs of the clients\r<br>I’ve always delivered high quality work and respected my deadlines\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -1065,7 +1065,7 @@
   },
   "133": {
     "chinese": "好的，谢谢你的到来，很高兴见到你。我明天会给你打电话。好的，我很期待。\r",
-    "english": "Okay, thanks so much for coming in,Mr Torres,It was great to meet you\r\nI’ll give you a call tomorrow \r\nSounds good, I look forward to it\r",
+    "english": "Okay, thanks so much for coming in,Mr Torres,It was great to meet you\r<br>I’ll give you a call tomorrow \r<br>Sounds good, I look forward to it\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -1089,7 +1089,7 @@
   },
   "136": {
     "chinese": "好的，我打电话是通知你你的面试很成功，我想给你这个工作的offer。非常感谢，我很乐意接受这个工作，你想什么时候让我开始工作？\r",
-    "english": "Great! I’m calling to inform you that your interview was successful and I’d like to offer you the job\r\nThanks you much, I’d love to take the job\r\nWhen would you like me to start?\r",
+    "english": "Great! I’m calling to inform you that your interview was successful and I’d like to offer you the job\r<br>Thanks you much, I’d love to take the job\r<br>When would you like me to start?\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -1193,7 +1193,7 @@
   },
   "149": {
     "chinese": "我们也喜欢一起去看足球比赛,足球是如此美丽的运动,你可以看着球员做惊人的事情,这是世界上最好的游戏之一\r",
-    "english": "We also like going to soccer matches together. \r\nSoccer is such a beautiful game.\r\nYou can watch players do amazing things.\r\nIt’s one of the best games in the world.\r",
+    "english": "We also like going to soccer matches together. \r<br>Soccer is such a beautiful game.\r<br>You can watch players do amazing things.\r<br>It’s one of the best games in the world.\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -1201,7 +1201,7 @@
   },
   "150": {
     "chinese": "我也喜欢在空闲时间和家人去远足和露营,我喜欢它，因为你可以看到很多美丽的风景,睡在帐篷里太神奇了,因为我喜欢花时间在大自然中.\r",
-    "english": "I also like going hiking and camping with my family in my free time.\r\nI like it because you can see a lot of beautiful landscapes.\r\nSleeping in a tent is so amazing, because I love spending time in natures.\r",
+    "english": "I also like going hiking and camping with my family in my free time.\r<br>I like it because you can see a lot of beautiful landscapes.\r<br>Sleeping in a tent is so amazing, because I love spending time in natures.\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -1217,7 +1217,7 @@
   },
   "152": {
     "chinese": "嗯,不经常,我主要在周末做这件事,我通常和我的朋友一起骑自行车,他们一会儿就到\r",
-    "english": "Well , not so often. I do it mostly on weekends.\r\nI usually go for bike rides with my friends.\r\nThey’ll be here a little later.\r",
+    "english": "Well , not so often. I do it mostly on weekends.\r<br>I usually go for bike rides with my friends.\r<br>They’ll be here a little later.\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -1249,7 +1249,7 @@
   },
   "156": {
     "chinese": "我妹妹上课,我从她身上学到了,我只在做完作业需要放松的时候才弹钢琴,或者当我在学校度过艰难的一天时\r",
-    "english": "No, mys sister does and I learned from her.\r\nI play the piano only when I need to relax after doing homework or when I had a hard day at school\r",
+    "english": "No, mys sister does and I learned from her.\r<br>I play the piano only when I need to relax after doing homework or when I had a hard day at school\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -1257,7 +1257,7 @@
   },
   "157": {
     "chinese": "我也喜欢在空闲时间去听音乐会,这真是一次不可思议的经历\r",
-    "english": "I also love going to concerts in my free time.\r\nIt’s such an incredible experience.\r",
+    "english": "I also love going to concerts in my free time.\r<br>It’s such an incredible experience.\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -1289,7 +1289,7 @@
   },
   "161": {
     "chinese": "是呀,我有,我喜欢听雷鬼音乐,我只去过一次音乐会\r",
-    "english": "Yes, I do! l love listening to reggae music.\r\nI’ve only been once to a concert.\r",
+    "english": "Yes, I do! l love listening to reggae music.\r<br>I’ve only been once to a concert.\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -1297,7 +1297,7 @@
   },
   "162": {
     "chinese": "我也喜欢看漫画,我哥哥有很多漫画,他借给我,我读得很开心\r",
-    "english": "I also like reading comics. My brother has lots of comics and he lends them to me.\r\nI have so much fun reading them.\r",
+    "english": "I also like reading comics. My brother has lots of comics and he lends them to me.\r<br>I have so much fun reading them.\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -1377,7 +1377,7 @@
   },
   "172": {
     "chinese": "我加入了一个马俱乐部,到目前为止，这是一次奇妙的经历\r",
-    "english": "I have joined a horse club.\r\nIt has been an amazing experience so far.\r",
+    "english": "I have joined a horse club.\r<br>It has been an amazing experience so far.\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -1385,7 +1385,7 @@
   },
   "173": {
     "chinese": "我一直很喜欢马,从我还是个孩子的时候，我的梦想是能骑马,我学会了如何照顾马。它们是如此美丽和强壮的马给我带来如此多的欢乐\r",
-    "english": "I have always loved horses, since I was a child and it was my dream to be able to ride a horse.\r\nI learned how to take care of the horses.\r\nThey are so beautiful and strong!\r\nHorses bring me so much joy!\r",
+    "english": "I have always loved horses, since I was a child and it was my dream to be able to ride a horse.\r<br>I learned how to take care of the horses.\r<br>They are so beautiful and strong!\r<br>Horses bring me so much joy!\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -1409,7 +1409,7 @@
   },
   "176": {
     "chinese": "太好了，让我们下周一起去，我会打电话给你，让你了解详情\r",
-    "english": "Great! Let’s go together next week.\r\nI will call you and let you know the details.\r",
+    "english": "Great! Let’s go together next week.\r<br>I will call you and let you know the details.\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -1425,7 +1425,7 @@
   },
   "178": {
     "chinese": "好的,我现在得走了,我要去滑冰公园，拜拜。\r",
-    "english": "Ok, I have to go now.\r\nI’m going to the skate park.\r\nIt was nice talking to you. See ya!\r",
+    "english": "Ok, I have to go now.\r<br>I’m going to the skate park.\r<br>It was nice talking to you. See ya!\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -1465,7 +1465,7 @@
   },
   "183": {
     "chinese": "1.你猜\r",
-    "english": "2.我忘了\r\n3.下个月30\r\n4.明年五月30\r\n5.三十出头  I’m in my early thirties\r\n6.我是1998年生的，你算吧\r\n7.我中年了\r\n8.大到可你当你爸爸了\r\n9.成年了\r\n10.可以喝酒的年纪了\r\n11.大二学生\r\n12.你呢？\r",
+    "english": "2.我忘了\r<br>3.下个月30\r<br>4.明年五月30\r<br>5.三十出头  I’m in my early thirties\r<br>6.我是1998年生的，你算吧\r<br>7.我中年了\r<br>8.大到可你当你爸爸了\r<br>9.成年了\r<br>10.可以喝酒的年纪了\r<br>11.大二学生\r<br>12.你呢？\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -1473,7 +1473,7 @@
   },
   "184": {
     "chinese": "你是做什么的？你什么工作？\r",
-    "english": "What do you do?\r\nwhat do you do for a living?\r\nWhat’s you job?\r",
+    "english": "What do you do?\r<br>what do you do for a living?\r<br>What’s you job?\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -1497,7 +1497,7 @@
   },
   "187": {
     "chinese": "1.我在政府部门上班\r",
-    "english": "2.我刚建立我的工作室\r\n3.我曾是一位银行职员，但是我上个月辞职了。目前正在求职\r\n4.I used to work in a beauty parlor as a hairdresser, but not any more.\r",
+    "english": "2.我刚建立我的工作室\r<br>3.我曾是一位银行职员，但是我上个月辞职了。目前正在求职\r<br>4.I used to work in a beauty parlor as a hairdresser, but not any more.\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -1505,7 +1505,7 @@
   },
   "188": {
     "chinese": "你公司在那？\r",
-    "english": "Where is your office?\r\nWhere do you work?\r\nWhere is your office located?\r",
+    "english": "Where is your office?\r<br>Where do you work?\r<br>Where is your office located?\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -1529,7 +1529,7 @@
   },
   "191": {
     "chinese": "你一般几点下班\r",
-    "english": "What time do you usually come off work?\r\nWhat time do you get off duty?\r\nWhen can you leave the office?\r",
+    "english": "What time do you usually come off work?\r<br>What time do you get off duty?\r<br>When can you leave the office?\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -1553,7 +1553,7 @@
   },
   "194": {
     "chinese": "下班后你一般做什么\r",
-    "english": "What do you usually do after work? \r\nWhat’s your after-work pastime?\r\nHow do you make use of your time after work?\r",
+    "english": "What do you usually do after work? \r<br>What’s your after-work pastime?\r<br>How do you make use of your time after work?\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -1585,7 +1585,7 @@
   },
   "198": {
     "chinese": "你来自哪\r",
-    "english": "Where are you from?\r\nWhere do you come from?\r",
+    "english": "Where are you from?\r<br>Where do you come from?\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -1633,7 +1633,7 @@
   },
   "204": {
     "chinese": "你住在哪\r",
-    "english": "Where do you live?\r\nWhere is your apartment located?\r\nWhere are you staying?\r\nWhere exactly do you live?\r",
+    "english": "Where do you live?\r<br>Where is your apartment located?\r<br>Where are you staying?\r<br>Where exactly do you live?\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -1673,7 +1673,7 @@
   },
   "209": {
     "chinese": "## At The Airport\r",
-    "english": "Hello! May I see you passport, please?\r\nHere you go.\r",
+    "english": "Hello! May I see you passport, please?\r<br>Here you go.\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -1705,7 +1705,7 @@
   },
   "213": {
     "chinese": "It appears your bag is just a bit too heavy\r",
-    "english": "Just a bit 有一点\r\nIt is over our weight requirement\r\nOver requirement 超过要求\r\nexceed requirement\r",
+    "english": "Just a bit 有一点\r<br>It is over our weight requirement\r<br>Over requirement 超过要求\r<br>exceed requirement\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -1737,7 +1737,7 @@
   },
   "217": {
     "chinese": "Do you have any liquids in your bag?\r",
-    "english": "I do. I have a water bottle and some hand lotion.\r\nThe water bottle is too big. You can either drink it right now or throw it away\r\nEither ... or ...\r\nThrow it away 扔掉\r",
+    "english": "I do. I have a water bottle and some hand lotion.\r<br>The water bottle is too big. You can either drink it right now or throw it away\r<br>Either ... or ...\r<br>Throw it away 扔掉\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -1769,7 +1769,7 @@
   },
   "221": {
     "chinese": "What is the purpose of your visit?\r",
-    "english": "I’m going to be studying here at the local university.\r\nHow long will you be staying?\r\nDo you have anything to declare?\r",
+    "english": "I’m going to be studying here at the local university.\r<br>How long will you be staying?\r<br>Do you have anything to declare?\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -1777,7 +1777,7 @@
   },
   "222": {
     "chinese": "#### 自我介绍\r",
-    "english": "1. tell me about yourself\r\n我在2019年本科计算机科学与技术专业毕业，在上家公司里工作了4年，4年间，我从普通工程师逐渐成长为前端小组长，负责项目的开发，项目工程化建设、团队实习生培训等等。我擅长的技术有js react node，对 nextjs nestjs微前端也有了解。我是一个坚持并且充满动力的人，我自学了很多技术，并把他们应用到了工作中，大大提升了团队的工作效率，得到了同事和领导的认可。希望在新的工作中发挥专长，也期待进一步学习和提升自己。\r\nok well, I graduated with a Bachleor's Degree in Computer Science and Technology in 2019. I worked at my previous company for four years. During that time, I worked hard, and I went from a regular engineer to the team leader of the frontend group. As a team leader, I managed project development, set up project structures, and trained interns.\r\nI'm skilled in JavaScript, React, and Node.js. I also have some experience with Next.js, Nest.js, Docker and Nginx . I’m very persistent and motivated. I’ve taught myself a lot of new skills and applied them to my work, which has really improved our team’s working efficiency. Both my colleagues and leaders have recognized my efforts.\r\nI'm looking forward to using my skills in a new role and excited about the opportunity to learn more and grow professionally.\r",
+    "english": "1. tell me about yourself\r<br>我在2019年本科计算机科学与技术专业毕业，在上家公司里工作了4年，4年间，我从普通工程师逐渐成长为前端小组长，负责项目的开发，项目工程化建设、团队实习生培训等等。我擅长的技术有js react node，对 nextjs nestjs微前端也有了解。我是一个坚持并且充满动力的人，我自学了很多技术，并把他们应用到了工作中，大大提升了团队的工作效率，得到了同事和领导的认可。希望在新的工作中发挥专长，也期待进一步学习和提升自己。\r<br>ok well, I graduated with a Bachleor's Degree in Computer Science and Technology in 2019. I worked at my previous company for four years. During that time, I worked hard, and I went from a regular engineer to the team leader of the frontend group. As a team leader, I managed project development, set up project structures, and trained interns.\r<br>I'm skilled in JavaScript, React, and Node.js. I also have some experience with Next.js, Nest.js, Docker and Nginx . I’m very persistent and motivated. I’ve taught myself a lot of new skills and applied them to my work, which has really improved our team’s working efficiency. Both my colleagues and leaders have recognized my efforts.\r<br>I'm looking forward to using my skills in a new role and excited about the opportunity to learn more and grow professionally.\r",
     "count": 0,
     "remember": false,
     "tip": "",
@@ -1793,7 +1793,7 @@
   },
   "224": {
     "chinese": "3. what are you strengths and weaknesses? and how would them affect your job with us?\r",
-    "english": "My strengths are persistence and strong motivation. In my past work, I give my all to achieve my goals in spite of any\r\nhardships I might encounter alone the way. for example, I had discovered many problems in the team development process. I had self-taught many front-end technologies, such as browser plugin development, NextJs, Node, NestJS. In addition, I had provided the team with many helpful plugins and scripts, greatly reducing the team's repetitive work. I am currently learning oral and listening skills, and I believe I will definitely use them in my future work. My weakness is that I am not good at exams and I dislike rote memorization, but I am better at identifying and solving problems.\r",
+    "english": "My strengths are persistence and strong motivation. In my past work, I give my all to achieve my goals in spite of any\r<br>hardships I might encounter alone the way. for example, I had discovered many problems in the team development process. I had self-taught many front-end technologies, such as browser plugin development, NextJs, Node, NestJS. In addition, I had provided the team with many helpful plugins and scripts, greatly reducing the team's repetitive work. I am currently learning oral and listening skills, and I believe I will definitely use them in my future work. My weakness is that I am not good at exams and I dislike rote memorization, but I am better at identifying and solving problems.\r",
     "count": 0,
     "remember": false,
     "tip": "",
