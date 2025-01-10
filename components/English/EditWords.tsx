@@ -27,7 +27,7 @@ const EditWords = ({
   const [open, setOpen] = React.useState(false);
 
   useEffect(() => {
-    setTempData(data);
+    data && setTempData(data);
   }, [data]);
   const onOk = () => {
     if (tempData?.chinese.trim() === "" || tempData?.english.trim() === "") {

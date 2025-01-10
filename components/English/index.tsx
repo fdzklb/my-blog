@@ -190,6 +190,7 @@ const English = () => {
   const setRandom = () => {
     const randomName =
       selectNames[Math.floor(Math.random() * selectNames.length)];
+    const dataArr = JSON.parse(window.localStorage.getItem(randomName) || "[]");
     let randomIndex = Math.floor(Math.random() * dataArr.length);
     if (modeType === "收藏模式") {
       const focusIndexMap = JSON.parse(
