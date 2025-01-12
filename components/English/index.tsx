@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import Setting from "./Setting";
 import ImportWords from "./ImportWords";
 import EditWords from "./EditWords";
+import { LucideDelete } from "lucide-react";
 
 export type dataItemType = {
   chinese: string;
@@ -215,7 +216,11 @@ const English = () => {
   };
 
   // 添加单词
-  const addWords = (name: string, content: dataItemType[], focusIndexMapItem?:number[]) => {
+  const addWords = (
+    name: string,
+    content: dataItemType[],
+    focusIndexMapItem?: number[]
+  ) => {
     const strData = JSON.stringify(content);
     window.localStorage.setItem(name, strData);
 
@@ -223,10 +228,15 @@ const English = () => {
     window.localStorage.setItem("allNames", JSON.stringify(tempAllNames));
     setAllNames(tempAllNames);
     setSelectNames([...selectNames, name]);
-    if(focusIndexMapItem && focusIndexMapItem.length > 0){
-      const focusIndexMap = JSON.parse(window.localStorage.getItem("focusIndexMap") || "{}");
+    if (focusIndexMapItem && focusIndexMapItem.length > 0) {
+      const focusIndexMap = JSON.parse(
+        window.localStorage.getItem("focusIndexMap") || "{}"
+      );
       focusIndexMap[name] = focusIndexMapItem;
-      window.localStorage.setItem("focusIndexMap", JSON.stringify(focusIndexMap));
+      window.localStorage.setItem(
+        "focusIndexMap",
+        JSON.stringify(focusIndexMap)
+      );
     }
     if (current[0] === "") {
       setCurrent([name, 0]);
@@ -251,10 +261,30 @@ const English = () => {
         window.localStorage.getItem("focusIndexMap") || "{}"
       );
       delete focusIndexMap[name];
-      window.localStorage.setItem("focusIndexMap", JSON.stringify(focusIndexMap));
+      window.localStorage.setItem(
+        "focusIndexMap",
+        JSON.stringify(focusIndexMap)
+      );
       setRefresh((v) => v + 1);
     }
   };
+
+  const deleteWord = () => {
+    if(dataItem.isFocus) {
+      window.alert('请先取消收藏再删除！')
+      return
+    }
+    const words = JSON.parse(window.localStorage.getItem(current[0]) || "[]");
+    if(words.length === 1) {
+      window.alert('该单词本只有这一个单词，请直接删除单词本')
+      return
+    }
+    if(window.confirm(`确定删除单词吗？`)) {
+      words.splice(current[1], 1);
+      window.localStorage.setItem(current[0], JSON.stringify(words));
+    }
+    setRefresh((v) => v + 1);
+  }
 
   // 更新单词
   const updateWord = (data: dataItemType) => {
@@ -292,6 +322,7 @@ const English = () => {
           <div className="flex space-x-4 items-center">
             <span className="text-lg">{dataItem?.chinese}</span>
             <EditWords data={dataItem} updateWord={updateWord} />
+            <LucideDelete className="w-4 h-4 cursor-pointer text-blue-500" onClick={deleteWord} />
           </div>
           <div className="cursor-pointer w-full text-center text-lg">
             <span>{visible ? dataItem?.english : ""}</span>
