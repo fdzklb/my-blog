@@ -299,7 +299,6 @@ const English = () => {
     setCurrent([names[0], 0]);
   };
 
-  console.log(lastCurrentArr);
   return (
     <div>
       <Setting
