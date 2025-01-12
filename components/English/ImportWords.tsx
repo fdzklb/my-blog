@@ -48,7 +48,14 @@ const ImportWords = ({ addWords }: { addWords: Function }) => {
 
     // 如果是粘贴过来的完整数据
     if(wordsStr.startsWith('~!@##@!~')) {
-      addWords(name, JSON.parse(wordsStr.split('~!@##@!~')[2]));
+      const rwa = JSON.parse(wordsStr.split('~!@##@!~')[2]);
+      const focusIndexMapItem: number[] = [];
+      rwa.forEach((element: dataItemType, index: number) => {
+        if(element.isFocus) {
+          focusIndexMapItem.push(index);
+        }
+      });
+      addWords(name, rwa, focusIndexMapItem);
       setWordsStr("");
       setName("");
       return;

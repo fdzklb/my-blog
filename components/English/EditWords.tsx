@@ -35,6 +35,7 @@ const EditWords = ({
       return;
     }
     updateWord(tempData);
+    setOpen(false);
   };
 
   return (

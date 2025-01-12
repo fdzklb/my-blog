@@ -124,10 +124,10 @@ const Setting = ({
                   >
                     {name}
                   </label>
-                  {/* <Delete
-                    className="size-4 text"
+                  <Delete
+                    className="size-4 text cursor-pointer"
                     onClick={() => onDelete(name)}
-                  /> */}
+                  />
                   <div title='复制单词本完整数据，包括单词是否被收藏等信息，用于粘贴到其他终端设备'>
                     <LucideCopy className="size-4 text cursor-pointer" onClick={() => copyData(name)} />
                   </div>

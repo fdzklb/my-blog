@@ -215,7 +215,7 @@ const English = () => {
   };
 
   // 添加单词
-  const addWords = (name: string, content: dataItemType[]) => {
+  const addWords = (name: string, content: dataItemType[], focusIndexMapItem?:number[]) => {
     const strData = JSON.stringify(content);
     window.localStorage.setItem(name, strData);
 
@@ -223,6 +223,11 @@ const English = () => {
     window.localStorage.setItem("allNames", JSON.stringify(tempAllNames));
     setAllNames(tempAllNames);
     setSelectNames([...selectNames, name]);
+    if(focusIndexMapItem && focusIndexMapItem.length > 0){
+      const focusIndexMap = JSON.parse(window.localStorage.getItem("focusIndexMap") || "{}");
+      focusIndexMap[name] = focusIndexMapItem;
+      window.localStorage.setItem("focusIndexMap", JSON.stringify(focusIndexMap));
+    }
     if (current[0] === "") {
       setCurrent([name, 0]);
     }
@@ -236,17 +241,17 @@ const English = () => {
       const tempAllNames = allNames.filter((item) => item !== name);
       window.localStorage.setItem("allNames", JSON.stringify(tempAllNames));
       setAllNames(tempAllNames);
+      const tempSelectNames = selectNames.filter((item) => item !== name);
       setSelectNames(selectNames.filter((item) => item !== name));
+      if (current[0] === name) {
+        setCurrent([tempSelectNames[0], 0]);
+      }
 
       const focusIndexMap = JSON.parse(
         window.localStorage.getItem("focusIndexMap") || "{}"
       );
       delete focusIndexMap[name];
       window.localStorage.setItem("focusIndexMap", JSON.stringify(focusIndexMap));
-
-      // if (current[0] === name) {
-      //   setCurrent([selectNames[], 0]);
-      // }
       setRefresh((v) => v + 1);
     }
   };
