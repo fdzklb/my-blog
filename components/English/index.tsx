@@ -26,7 +26,7 @@ export type dataItemType = {
 // const English = ({ data }: DataType) => {
 const English = () => {
   const [current, setCurrent] = useState<[string, number]>(["", 0]);
-  const [lastCurrentArr, setLastCurrentArr] = useState<[string, number][]>([]); // 包含最近5次的current数据
+  const [lastCurrentArr, setLastCurrentArr] = useState<[string, number][]>([]); // 包含最近20次的current数据
   const [visible, setVisible] = useState(false);
   const [allNames, setAllNames] = useState<string[]>([]);
   const [modeType, setModeType] = useState<string>("艾宾浩斯记忆法"); // 艾斯记忆、收藏模式
@@ -74,18 +74,18 @@ const English = () => {
 
     // 记录最近20次的current数据
     const tempLastCurrentArr = JSON.parse(JSON.stringify(lastCurrentArr));
-    if (tempLastCurrentArr.length === 20) {
-      tempLastCurrentArr.shift();
-    }
-    // 如果已存在，删除之前的
     const index = tempLastCurrentArr.findIndex(
       (item) => JSON.stringify(item) === JSON.stringify(current)
     );
-    if (index > -1) {
-      tempLastCurrentArr.splice(index, 1);
+
+    // 如果不在历史记录中
+    if (index === -1) {
+      if (tempLastCurrentArr.length >= 20) {
+        tempLastCurrentArr.shift();
+      }
+      tempLastCurrentArr.push(current);
+      setLastCurrentArr(tempLastCurrentArr);
     }
-    tempLastCurrentArr.push(current);
-    setLastCurrentArr(tempLastCurrentArr);
 
     // 设置count增加1， 更新lastShowTime
     const dataArr = JSON.parse(window.localStorage.getItem(current[0]) || "[]");
@@ -133,20 +133,18 @@ const English = () => {
   };
 
   // 上一句
-  // const setPre = () => {
-  //   const data = JSON.parse(window.localStorage.getItem(current[0]) || "[]");
-  //   if (current[1] - 1 >= 0) {
-  //     setCurrent(([name, index]) => [name, index - 1]);
-  //   } else {
-  //     setCurrent([current[0], data.length - 1]);
-  //   }
-  // };
+  const setPre = () => {
+    if (current[1] - 1 >= 0) {
+      setCurrent(([name, index]) => [name, index - 1]);
+    }
+  };
+
   // 下一句
-  const setNext = () => {
-    if (current[1] + 1 < dataArr.length) {
-      setCurrent(([name, index]) => [name, index + 1]);
+  const setNext = (step: number = 1) => {
+    if (current[1] + step < dataArr.length) {
+      setCurrent(([name, index]) => [name, index + step]);
     } else {
-      setCurrent([current[0], 0]);
+      setCurrent([current[0], dataArr.length - 1]);
     }
   };
 
@@ -270,21 +268,21 @@ const English = () => {
   };
 
   const deleteWord = () => {
-    if(dataItem.isFocus) {
-      window.alert('请先取消收藏再删除！')
-      return
+    if (dataItem.isFocus) {
+      window.alert("请先取消收藏再删除！");
+      return;
     }
     const words = JSON.parse(window.localStorage.getItem(current[0]) || "[]");
-    if(words.length === 1) {
-      window.alert('该单词本只有这一个单词，请直接删除单词本')
-      return
+    if (words.length === 1) {
+      window.alert("该单词本只有这一个单词，请直接删除单词本");
+      return;
     }
-    if(window.confirm(`确定删除单词吗？`)) {
+    if (window.confirm(`确定删除单词吗？`)) {
       words.splice(current[1], 1);
       window.localStorage.setItem(current[0], JSON.stringify(words));
     }
     setRefresh((v) => v + 1);
-  }
+  };
 
   // 更新单词
   const updateWord = (data: dataItemType) => {
@@ -301,6 +299,7 @@ const English = () => {
     setCurrent([names[0], 0]);
   };
 
+  console.log(lastCurrentArr);
   return (
     <div>
       <Setting
@@ -322,7 +321,10 @@ const English = () => {
           <div className="flex space-x-4 items-center">
             <span className="text-lg">{dataItem?.chinese}</span>
             <EditWords data={dataItem} updateWord={updateWord} />
-            <LucideDelete className="w-4 h-4 cursor-pointer text-blue-500" onClick={deleteWord} />
+            <LucideDelete
+              className="w-4 h-4 cursor-pointer text-blue-500"
+              onClick={deleteWord}
+            />
           </div>
           <div className="cursor-pointer w-full text-center text-lg">
             <span>{visible ? dataItem?.english : ""}</span>
@@ -346,10 +348,10 @@ const English = () => {
           )}
           <div className="bottom-20 fixed w-[90%] flex justify-around sm:justify-between">
             <div className="space-y-4 w-[45%]">
-              <Button className="w-full" onClick={setLastOne}>
-                前一句
+              <Button className="w-full" onClick={setPre}>
+                上一句
               </Button>
-              <Button className="w-full" onClick={setNext}>
+              <Button className="w-full" onClick={() => setNext(1)}>
                 下一句
               </Button>
               <Button className="w-full" onClick={() => setVisible((v) => !v)}>
@@ -367,12 +369,12 @@ const English = () => {
               <Button className="w-full" onClick={setFocus}>
                 {dataItem?.isFocus ? "取消收藏" : "收藏"}
               </Button>
-              {/* <Button className="w-full" onClick={setNext}>
-            下一句
-          </Button>
-          <Button className="w-full" onClick={setRandom}>
-            随机-&gt;
-          </Button> */}
+              <Button className="w-full" onClick={setLastOne}>
+                前一句(历史记录)
+              </Button>
+              <Button className="w-full" onClick={() => setNext(5)}>
+                下5句
+              </Button>
             </div>
           </div>
         </Wrapper>
