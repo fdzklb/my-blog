@@ -72,9 +72,9 @@ const English = () => {
     if (current[0] === "") return;
     setVisible(false);
 
-    // 记录最近5次的current数据
+    // 记录最近20次的current数据
     const tempLastCurrentArr = JSON.parse(JSON.stringify(lastCurrentArr));
-    if (tempLastCurrentArr.length === 5) {
+    if (tempLastCurrentArr.length === 20) {
       tempLastCurrentArr.shift();
     }
     // 如果已存在，删除之前的
