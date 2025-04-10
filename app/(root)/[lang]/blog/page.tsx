@@ -2,13 +2,12 @@ import { Wrapper } from "@/components/wrapper";
 import { getSortedBlogsMetaData } from "@/lib/resolveMarkdown";
 import { BlogList } from "@/components/blog/blog-list";
 
-
 export const revalidate = 60;
 export default async function Page({ params }: { params: { lang: string } }) {
 
   const { lang } = await params
   // 目前无英文博客
-  const blogLists = lang === 'zh' ? await getSortedBlogsMetaData() : []
+  const blogLists = lang === 'zh' ? getSortedBlogsMetaData() : []
   
   return (
     <Wrapper className="flex flex-col px-6 pb-24 pt-8">

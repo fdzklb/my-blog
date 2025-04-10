@@ -4,46 +4,51 @@
 import fsPromises from "fs/promises";
 import fs from "fs";
 import path from "path";
-import matter from "gray-matter";
-import dayjs from "dayjs";
-import { unified } from "unified";
-import remarkParse from "remark-parse";
-import remarkRehype from "remark-rehype";
-import rehypeStringify from "rehype-stringify";
-import rehypePrettyCode from "rehype-pretty-code";
+// import dayjs from "dayjs";
+// import { unified } from "unified";
+// import remarkParse from "remark-parse";
+// import remarkRehype from "remark-rehype";
+// import rehypeStringify from "rehype-stringify";
+// import rehypePrettyCode from "rehype-pretty-code";
 
 const blogs = {
   blogsDir: "blogLists",
 };
 
-// 获取排序后的所有文章数据的metaData
-export const getSortedBlogsMetaData = async (category = '', blogsDir = blogs.blogsDir) => {
+type Metadata = {
+  title: string;
+  date: string;
+  tags: string;
+  description: string;
+  categories: string;
+  bgImgPath: string;
+}
+
+type Post = {
+  slug: string;
+  metadata: Metadata;
+  content: string;
+}
+
+/**
+ * 获取文章meta数据
+ * @param category // 根据分类获取文章
+ * @param blogsDir // 根据目录获取文章
+ * @returns 文章meta数据
+ */
+export const getSortedBlogsMetaData = (category = '', blogsDir = blogs.blogsDir) => {
   const blogsDirectory = path.join(process.cwd(), blogsDir);
-  const blogNames = await fsPromises.readdir(blogsDirectory);
-  let allblogsData = blogNames
-    .filter((name) => name !== ".DS_Store") // mac电脑会出现.DS_Store, remove /DS_Store
+  let allblogsData = fs.readdirSync(blogsDirectory).filter((file) => path.extname(file) === '.mdx')
     .map((name) => {
-      // 去除文件名的md后缀，使文件名作为文章id使用
-      const slug = name.replace(".md", "");
-      const mdContent = fs.readFileSync(path.join(blogsDirectory, name), {
-        encoding: "utf-8",
-      });
-      // use gray-matter to parse the blog metadata section
-      const matterData = matter(mdContent);
-      const { date, bgImgPath, title, description, categories } = matterData.data;
-      return {
-        slug,
-        date,
-        bgImgPath,
-        title,
-        description,
-        categories,
-      };
+      // 去除文件名的md,mdx后缀，使文件名作为文章id使用
+      const slug = name.replace(/\.(mdx|md)$/, "");
+      const { metadata } = readMdFile(slug, blogsDir);
+      return { ...metadata, slug };
     });
   
   // 如果传入了分类，则只返回该分类下的文章
   if(category) {
-    allblogsData = allblogsData.filter((blog) => blog.categories.split(',')?.includes(category));
+    allblogsData = allblogsData.filter((blog) => blog?.categories.split(',')?.includes(category));
   }
   // 按照日期从近到远排序
   return allblogsData.sort(({ date: a }, { date: b }) => {
@@ -62,33 +67,37 @@ export const getAllSlug = async (blogsDir = blogs.blogsDir) => {
     .filter((name) => name != ".DS_Store")
     .map((name) => ({
       params: {
-        slug: name.replace(".md", ""),
+        slug: name.replace(".mdx", ""),
       },
     }));
 };
 
-// 通过文章id获取文章内容
-export const getBlogBySlug = async (slug: string, blogsDir = blogs.blogsDir) => {
-  const blogPath = path.join(process.cwd(), blogsDir, `${slug}.md`);
-  const mdContent = await fsPromises.readFile(path.join(blogPath), {
+export const getBlogBySlug = (slug: string, blogsDir = blogs.blogsDir) : Post => {
+  return readMdFile(slug, blogsDir);
+}
+// 解析mdx文件
+function parseFrontmatter(fileContent: string) {
+  let frontmatterRegex = /---\s*([\s\S]*?)\s*---/
+  let match = frontmatterRegex.exec(fileContent)
+  let frontMatterBlock = match![1]
+  let content = fileContent.replace(frontmatterRegex, '').trim()
+  let frontMatterLines = frontMatterBlock.trim().split('\n')
+  let metadata: Partial<Metadata> = {}
+
+  frontMatterLines.forEach((line) => {
+    let [key, ...valueArr] = line.split(': ')
+    let value = valueArr.join(': ').trim()
+    value = value.replace(/^['"](.*)['"]$/, '$1')
+    metadata[key.trim() as keyof Metadata] = value
+  })
+
+  return { metadata: metadata as Metadata, content }
+}
+
+
+const readMdFile = (name = '', blogsDir = blogs.blogsDir) => {
+  const mdFile = fs.readFileSync(path.join(process.cwd(), blogsDir, `${name}.mdx`), {
     encoding: "utf-8",
   });
-  // 使用matter解析markdown元数据和内容
-  const matterData = matter(mdContent);
-  const content = await unified()
-    .use(remarkParse)
-    .use(remarkRehype)
-    .use(rehypePrettyCode, {
-      keepBackground: false,
-    })
-    .use(rehypeStringify)
-    .process(matterData.content);
-  return {
-    slug,
-    date: matterData.data.date,
-    title: matterData.data.title,
-    categories: matterData.data.categories,
-    htmlContent: content.value,
-    description: matterData.data.description,
-  };
-};
+  return { ... parseFrontmatter(mdFile), slug: name } as Post;
+}

@@ -118,6 +118,7 @@ const English = () => {
     }
     if (dataItem.english !== "") {
       const utterThis = new SpeechSynthesisUtterance(dataItem.english);
+      utterThis.rate = 1.2; // 设置语速
       synth.speak(utterThis);
     }
   };
