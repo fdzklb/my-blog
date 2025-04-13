@@ -1,8 +1,6 @@
 import type { NextConfig } from "next";
-import createMDX from '@next/mdx'
 
 const nextConfig: NextConfig = {
-  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   // build 阶段禁止 eslint
   eslint: { ignoreDuringBuilds: true },
   // build 阶段禁止 ts 类型检查
@@ -14,10 +12,6 @@ const nextConfig: NextConfig = {
   transpilePackages: ['next-mdx-remote'],
 };
 
-const withMDX = createMDX({
-  // Add markdown plugins here, as desired
-})
-
-export default withMDX(nextConfig)
+export default nextConfig
 
 

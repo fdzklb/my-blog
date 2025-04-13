@@ -1,0 +1,110 @@
+---
+title: "(第五章)浏览器插件开发(附源码)"
+date: "2024-12-13"
+description: "插件存储功能(Storage)"
+bgImgPath: "/imgs/qwed.jpg"
+categories: "前端"
+---
+## 前言
+ 与网页类似，浏览器插件也有用来储存数据的空间：我们可以调用浏览器插件的storage api，以此来持久化用户数据和状态。
+
+## 关于浏览器插件储存有一些特性
+- 所有扩展程`的部分（包括插件的 Service Worker 和content script）都可以访问 Storage API。
+- Storage API 的读取和写入都是异步。
+- 用户清除缓存和浏览记录，这些数据仍会保留。
+- 即使使用无痕模式拆分，系统仍会保留已存储的设置。
+
+## 存储区域
+### Storage API 有几种存储方式
+
+[storage.local](https://developer.chrome.google.cn/docs/extensions/reference/api/storage?hl=zh-cn#property-local)
+数据会存储在本地，并会在扩展程序被移除时清除。存储空间上限为 10 MB（在 Chrome 113 及更低版本中为 5 MB），但可以通过请求 "unlimitedStorage" 权限提高上限。建议使用 storage.local 存储更多数据。
+
+[storage.session](https://developer.chrome.google.cn/docs/extensions/reference/api/storage?hl=zh-cn#property-session)
+在浏览器会话期间将数据保存在内存中。默认情况下，它不会向内容脚本公开，但可以通过设置 [chrome.storage.session.setAccessLevel()](https://developer.chrome.google.cn/docs/extensions/reference/api/storage?hl=zh-cn#method-StorageArea-setAccessLevel) 来更改此行为。存储空间上限为 10 MB（在 Chrome 111 及更低版本中为 1 MB）。
+
+[storage.sync](https://developer.chrome.google.cn/docs/extensions/reference/api/storage?hl=zh-cn#property-sync)
+如果启用了同步功能，数据会同步到用户登录的任何 Chrome 浏览器。如果停用，它的行为类似于 storage.local。Chrome 会在浏览器离线时将数据存储在本地，并在浏览器恢复在线状态时继续同步。配额限制约为 100 KB，每项内容 8 KB。建议使用 storage.sync 在各同步的浏览器之间保留用户设置。如果您要处理敏感用户数据，请改用 storage.session。
+
+## 使用方法
+首先，我们需要在manifest.json中声明权限
+
+```json
+"permissions": [
+  "storage"
+]
+```
+
+### Local 存储
+
+```javascript
+chrome.storage.local.set({ key: value }).then(() => {
+  console.log("Value is set");
+});
+
+chrome.storage.local.get(["key"]).then((result) => {
+  console.log("Value currently is " + result.key);
+});
+```
+
+### Session 存储
+```javascript
+chrome.storage.session.set({ key: value }).then(() => {
+  console.log("Value was set");
+});
+
+chrome.storage.session.get(["key"]).then((result) => {
+  console.log("Value currently is " + result.key);
+});
+```
+
+### Sync 存储
+```javascript
+chrome.storage.sync.set({ key: value }).then(() => {
+  console.log("Value is set");
+});
+
+chrome.storage.sync.get(["key"]).then((result) => {
+  console.log("Value currently is " + result.key);
+});
+```
+
+## 监听存储变化
+如需跟踪对存储空间所做的更改，请向其 onChanged 事件添加监听器。当存储空间发生任何变化时，就会触发该事件。示例代码会监听以下更改：
+```javascript
+chrome.storage.onChanged.addListener((changes, namespace) => {
+  for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
+    console.log(
+      `Storage key "${key}" in namespace "${namespace}" changed.`,
+      `Old value was "${oldValue}", new value is "${newValue}".`
+    );
+  }
+});
+```
+
+## 从存储空间异步预加载
+由于 Service Worker 不会一直运行，因此 Manifest V3 扩展程序有时需要在执行事件处理脚本之前，从存储空间异步加载数据。为此， 以下代码段使用异步 action.onClicked 事件处理脚本，用于等待 storageCache 全局的数据，以便在执行其逻辑之前填充
+
+```javascript
+// Where we will expose all the data we retrieve from storage.sync.
+const storageCache = { count: 0 };
+// Asynchronously retrieve data from storage.sync, then cache it.
+const initStorageCache = chrome.storage.sync.get().then((items) => {
+  // Copy the data retrieved from storage into storageCache.
+  Object.assign(storageCache, items);
+});
+
+chrome.action.onClicked.addListener(async (tab) => {
+  try {
+    await initStorageCache;
+  } catch (e) {
+    // Handle error that occurred during storage initialization.
+  }
+
+  // Normal action handler logic.
+  storageCache.count++;
+  storageCache.lastTabId = tab.id;
+  chrome.storage.sync.set(storageCache);
+});
+```
+

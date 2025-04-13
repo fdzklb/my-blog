@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { PATHS_MAP } from "@/constants";
+import { PATHS_MAP } from "@/lib/constants";
 
 import {
   Breadcrumb,

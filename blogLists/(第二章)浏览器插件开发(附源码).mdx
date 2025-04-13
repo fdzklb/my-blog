@@ -1,0 +1,115 @@
+---
+title: "(第二章)浏览器插件开发(附源码)"
+date: "2024-11-29"
+description: "chromium内核浏览器插件开发实战教程，使用v3版本api，由浅入深，讲解并附源码演示浏览器开发全流程。本章主要介绍插件内容脚本Content Script的注入方式。"
+bgImgPath: "/imgs/724a1.jpg"
+categories: "前端"
+---
+
+## Content Scripts的作用
+绝大多数插件都需要操作网页的DOM元素，来增强和拓展浏功能。而Content Scripts(内容脚本)是专门用来要操作浏网页DOM的。
+
+## Content Scripts的注入方式
+利用内容脚本操作网页dom，就需要将内容脚本注入到网页中，而注入方式主要分为两种方式：**静态注入** **动态注入**。
+
+### 静态注入
+在上一章节中我们一进入到baidu首页，网页的背景色就立即变成了红色。
+如果我们需要进入到匹配的网页就自动执行内容脚本，那么静态注入就是最好的选择。
+
+在**manifest.json**文件中配置**content_scripts**进行静态注入
+```json
+{
+  ...
+  "content_scripts": [
+    {
+      "matches": ["https://*.baidu.com/*"],//指定此内容脚本将被注入到哪些页面
+      "js": ["scripts/content.js"] // 内容脚本的文件
+    }
+  ],
+  ...
+}
+```
+**content_scripts** 还支持以下配置项：
+<Table headers={["配置项", "类型", "说明"]} rows={[
+  ["matches", "Array或string", "指定此内容脚本将被注入到哪些页面 ，如需详细了解这些字符串的语法，请参阅[匹配模式](https://developer.chrome.google.cn/docs/extensions/develop/concepts/match-patterns?hl=zh-cn)和[glob](https://developer.chrome.google.cn/docs/extensions/develop/concepts/content-scripts?hl=zh-cn#matchAndGlob)"],
+  ["css", "Array或string", "可选。要注入到匹配页面的 CSS 文件列表。这些是 在构建或显示任何 DOM 之前，按照它们在此数组中出现的顺序注入 "],
+  ["js", "Array", "要注入的JavaScript文件列表，这些文件会被注入到匹配的页面中，可选值：document_start(页面加载开始时)、document_end(DOM加载完成时)、document_idle(页面加载完成后)"],
+  ["run_at", "run_at", "指定脚本注入的时机，可选值：document_start(页面加载开始时)、document_end(DOM加载完成时)、document_idle(页面加载完成后)"],
+  ["all_frames", "布尔值", "是否将脚本注入到所有frame中，默认为false"],
+  ["match_about_blank", "布尔值", "是否将脚本注入到about:blank页面中，默认为false"],
+  ["world", "[ExecutionWorld](https://developer.chrome.google.cn/docs/extensions/reference/scripting?hl=zh-cn#type-ExecutionWorld)", "指定脚本运行的隔离环境，可选值：ISOLATED(独立环境)、MAIN(主页面环境)，默认ISOLATED"]
+]} />
+
+
+### 动态注入
+但是如果并不想一进入到页面就执行Content Scripts，而是在做了一些响应后，再注入执行，就需要进行动态注入。
+
+动态注入无需在**manifest.json**文件中配置，而通常在Service Worker中使用**chrome.scripting.executeScript()**进行动态注入，但是在注入之前需要获取注入页面的主机权限，可以通过设置host_permissions**或者**设置activeTab权限获取临时主机权限。
+
+#### 设置host_permissions
+
+```json
+{
+  "host_permissions": ["https://*.baidu.com/*"], // 添加需要访问的域名,也可以利用*通配符来进行匹配
+}
+```
+
+#### 设置activeTab权限
+```json
+{
+  "permissions": ["scripting", "activeTab"], // 添加scripting和activeTab权限，scripting是脚本注入权限
+}
+```
+
+动态注入可以直接注入脚本文件，如果功能简单也可以直接注入函数。
+
+#### 注入脚本文件
+```js
+// background/background.js
+chrome.scripting.executeScript({
+  target: {tabId: tab.id}, // 注入到目标标签页
+  files: ['scripts/content.js'] //脚本文件路径
+})
+```
+
+#### 注入函数
+```js
+// background/background.js
+chrome.scripting.executeScript({
+  target: {tabId: tab.id}, // 注入到目标标签页
+  func: function() {
+    document.body.style.backgroundColor = "orange";
+  }
+})
+```
+
+### 案例演示
+[动态注入示例-进入到百度首页后，点击插件图标，将页面背景色改为橙色](https://gitee.com/Leo-dazhenfang/browser-plug-indevelopment/tree/master/(%E7%AC%AC%E4%BA%8C%E7%AB%A0)%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91(%E9%99%84%E6%BA%90%E7%A0%81)%EF%BC%9A%E5%86%85%E5%AE%B9%E8%84%9A%E6%9C%AC(Content%20Script)%E7%9A%84%E6%B3%A8%E5%85%A5%E6%96%B9%E5%BC%8F)
+
+
+### 将内容脚本注入到MAIN环境中
+一个浏览器可以安装很多插件，为了不让插件之间和网页页面互相影响，每个内容脚本在自己隔离的世界中，因此内容脚本对自己JavaScript进行更改也不会与页面或其他扩展的内容脚本发生冲突。
+
+例如我们在内容脚本中定义了一个变量
+```js
+// scripts/content.js
+ const contentStr = '这是content脚本中的内容'
+```
+
+我们在网页主环境中打印会显示未定义,而在脚本环境中打印会显示内容
+![](/blogs/v3-2/img/image.png)
+
+如果我们想打破这种环境隔离，使网页主环境可以访问脚本的变量，我们可以通过设置**world为MAIN**来达到目的。
+
+```js
+// background/background.js
+chrome.scripting.executeScript({
+  target: {tabId: tab.id}, // 注入到目标标签页
+  files: ['scripts/content.js'], //脚本文件路径
+  world: 'MAIN', // 将脚本文件运行在主环境中中
+})
+```
+![](/blogs/v3-2/x.png)
+
+
+

@@ -1,13 +1,13 @@
 import * as React from "react";
 import { type Metadata } from "next";
-import { serialize } from "next-mdx-remote/serialize";
 import "./styles.css";
 import { getSortedBlogsMetaData, getBlogBySlug } from "@/lib/resolveMarkdown";
 import { CustomMDX } from "@/components/blog/mdxContent";
 import ReportViews from "@/components/ReportViews";
-import CommentList from "@/components/comment-list/CommentList";
-import InputComment from "@/components/comment-list/InputComment";
-import { WEBSITE } from "@/constants";
+// import CommentList from "@/components/comment-list/CommentList";
+// import InputComment from "@/components/comment-list/InputComment";
+import Anchor from "@/components/ui/anchor";
+import { WEBSITE } from "@/lib/constants";
 
 export const revalidate = 60;
 
@@ -47,18 +47,16 @@ export default async function Page(props: {
 }) {
   const { slug, lang } = await props.params;
   const blog = await getBlogBySlug(decodeURI(slug) as string);
-  const mdxSource = await serialize(blog.content, { parseFrontmatter: true })
-  console.log(mdxSource);
   return (
     <>
-      {/* <ReportViews
-        slug={blog.title}
-        title={blog.title}
-        date={blog.date}
-        description={blog.description}
-        categories={blog.categories}
-        suffix={'blog'}
-      /> */}
+      <ReportViews
+        slug={blog.metadata.title}
+        title={blog.metadata.title}
+        date={blog.metadata.date}
+        description={blog.metadata.description}
+        categories={blog.metadata.categories}
+        suffix={"blog"}
+      />
       {/* <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -80,23 +78,28 @@ export default async function Page(props: {
           }),
         }}
       /> */}
-      <div id="m-mdcontent">
-          <h1 className="title font-semibold text-2xl tracking-tighter">
-            {blog.metadata.title}
-          </h1>
-          <div className="flex justify-between items-center mt-2 mb-8 text-sm">
-            <p className="text-sm text-neutral-600 dark:text-neutral-400">
-              {blog.metadata.date}
-            </p>
-          </div>
+
+      <div id="m-mdcontent" className="pr-[20%] xl:pr-[30%]">
+        <h1 className="title font-semibold text-2xl tracking-tighter">
+          {blog.metadata.title}
+        </h1>
+        <div className="flex justify-between items-center mt-2 mb-8 text-sm">
+          <p className="text-sm text-neutral-600 dark:text-neutral-400">
+            {blog.metadata.date}
+          </p>
+        </div>
         <article>
           <CustomMDX
-            // source={mdxSource}
             source={blog.content}
           />
         </article>
         {/* <CommentList slug={blog.slug} /> */}
         {/* <InputComment slug={blog.slug} /> */}
+      </div>
+      <div className="hidden text-sm xl:block fixed right-3 top-[12%]">
+        <div className="xl:w-[380px] 2xl:w-[450px]">
+          <Anchor />
+        </div>
       </div>
     </>
   );

@@ -1,7 +1,7 @@
 import { SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { MobileNavSheet } from "./mobile-nav-sheet";
 import { getDictionary } from '@/app/(root)/dictionaries'
-import { WEBSITE } from "@/constants";
+import { WEBSITE } from "@/lib/constants";
 
 export async function MobileNav({ lang }: { lang: string }) {
   const dict = await getDictionary(lang)

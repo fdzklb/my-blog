@@ -1,0 +1,116 @@
+---
+title: "(第一章)浏览器插件开发(附源码)"
+date: "2023-11-29"
+description: "chromium内核浏览器插件开发实战教程，使用v3版本api，由浅入深，讲解并附源码演示浏览器开发全流程。本章主要介绍插件的组成部分以及浏览器插件开发环境搭建。"
+bgImgPath: "/imgs/61ac.jpg"
+categories: "前端"
+---
+
+## (第一章)浏览器插件开发(附源码)：插件组成部分介绍
+
+### 一 浏览器插件功能
+
+什么是 **浏览器插件** 以及浏览器插件有何功能作用，相信能点开这篇文章的朋友已无需我再介绍。
+
+### 二 浏览器插件种类
+常见的浏览器插件种类可以分为以下几种类型：
+- 以 chromium 为内核的浏览器插件，如 chrome、edge、opera
+- firefox 浏览器插件
+- safari 浏览器插件
+本文只专注于以 chromium 为内核的浏览器插件，因为这类浏览器使用最为广泛，并且以v3版本为主。
+
+### 三 浏览器插件开发需要用到的技术栈
+仅仅只需要**HTML**、**CSS**、**JS**就可完成开发，但是对于复杂功能的插件，使用框架开发会大大提高开发效率。后面我们会演示如何使用 plasmo 框架开发插件。
+
+### 四 插件的组成部分
+  主要介绍以下几个部分组成：
+- **popup** 弹窗页面
+- **options** 选项页面
+- **sidepanel** 侧边栏页面
+- **content scripts** 浏览器页面的脚本
+- **service worker** 后台脚本
+
+#### popup 页面
+把插件固定后，鼠标左键点击图标弹出的是插件的popup页面
+![插件组成部分](/blogs/v3-1/img/popup.png)
+
+#### options(选项页)和sidepanel(侧边栏)页面
+鼠标右键点击插件图标的选项按钮，可以打开插件的 options 页面，点击插件图标的侧边栏按钮，可以打开插件的 sidepanel 页面。
+![插件组成部分](/blogs/v3-1/img/side+option.png)
+![插件组成部分](/blogs/v3-1/img/o+s.png)
+
+
+#### content scripts(内容脚本)
+内容脚本是生效在网页上的，能够直接修改网页dom，为了安全考虑，内容脚本只能使用浏览器的部分api。从下图可以看出我们把百度首页的背景色改成了红色，并打印出了“this is content”。内容脚本打印的信息在网页的控制台查看。
+![插件组成部分](/blogs/v3-1/img/content.png)
+
+#### service worker(后台脚本)
+插件的service worker 与web的service worker 相似的地方是，两者都是在后台运行的脚本，都不能和页面内容直接交互。
+在扩展程序管理页面，找到对应的插件，点击Service Worker 查看，点击会弹出后台脚本的开发控制台，可以查看Service Worker脚本的相关信息，如console、Source(源码)、NetWork(网络请求)等等。
+![插件组成部分](/blogs/v3-1/img/bg.png)
+
+
+### 五 浏览器插件开发环境搭建
+
+[**项目源码示例**](https://gitee.com/Leo-dazhenfang/browser-plug-indevelopment/tree/master/(%E7%AC%AC%E4%B8%80%E7%AB%A0)%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91(%E9%99%84%E6%BA%90%E7%A0%81)%EF%BC%9A%E6%8F%92%E4%BB%B6%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86%E4%BB%8B%E7%BB%8D)
+
+浏览器插件开发仅仅只需要**HTML、CSS、JS**技术，不需要安装其他任何软件或npm包。
+
+#### manifest.json文件
+manifest.json 是插件开发中必要的文件，并且需要存放在项目根目录下。在manifest.json文件中可以配置插件的名称、描述、版本、权限、图标、以及各部分如popup、sidepanel、content scripts、service worker等文件的路径和其他配置项。
+
+``` json
+{
+  "manifest_version": 3, // 必须字段，表示插件版本
+  "name": "这里写插件名称", // 必须字段，表示插件名称
+  "description": "这里写插件描述", //插件描述 如果发布到应用商店则必须存在
+  "version": "1.0", // 必须字段，表示插件版本
+  "background": { // 配置service worker
+    "service_worker": "background/background.js"
+  },
+  "options_ui": { // 配置options页面
+   "page": "option/option.html",
+   "open_in_tab": true // 是否在标签页中打开
+  },
+  "action": { //配置插件图标相关
+    "default_popup": "popup/popup.html", // 插件图标点击后的默认页面
+    "default_icon": { // 插件图标，不同分辨率下展示不同像素图标
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "side_panel": {// 配置侧边栏页面
+    "default_path": "side_panel/sidepanel.html" 
+  },
+  "content_scripts": [ // 配置内容脚本
+    {
+      "matches": ["*://www.baidu.com/*"], // 指定此内容脚本将被注入到哪些页面
+      "js": ["scripts/content.js"] // 内容脚本的文件路径
+    }
+  ],
+  "icons": { // 插件图标，不同分辨率下展示不同像素图标，发布到应用商店则必须存在
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
+```
+
+当然很多配置项除了在manifest.json中进行静态的配置，也可以通过api动态修改配置。
+
+#### 其他文件
+插件开发中除了manifest.json文件是必须的，其他文件都是可选的，如popup、options、sidepanel、content scripts、service worker等。
+
+### 六 插件安装步骤
+![插件安装步骤](/blogs/v3-1/img/1.png)
+
+![插件安装步骤](/blogs/v3-1/img/2.png)
+
+![插件安装步骤](/blogs/v3-1/img/3.png)
+
+![插件安装步骤](/blogs/v3-1/img/5.png)
+
+![插件安装步骤](/blogs/v3-1/img/6.png)
+
+如果中途没报错则，那么恭喜你，插件开发已经完成。

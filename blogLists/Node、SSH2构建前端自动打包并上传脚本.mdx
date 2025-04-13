@@ -1,0 +1,185 @@
+---
+title: "Node+SSH2构建前端自动打包并上传脚本"
+date: "2023-11-28"
+description: "利用Node的process_child搭配ssh2的通信传输功能完成前端自动化打包并上传服务器，实现项目快速构建和部署"
+bgImgPath: "/imgs/pic10.webp"
+categories: "前端"
+---
+## 代码部署服务器发布常见方式
+  1. 一般大公司每次发布需要严格的执行流程，因此有自己打包发布运维平台，比如DevOps系统平台。但是这种方式一般在云服务器进行构建，限于云服务器的硬件配置以及构建发布流程复杂等因素，对于稍微复杂的项目，每次部署花费二三十分钟并不少见。
+  2. 本地打包，使用winscp或xmanager之类的文件传输工具手动操作上传到服务器
+  3. 自动化脚本实现打包上传服务器
+
+### 利用自动化脚本实现打包上传服务器
+  实现思路：
+   1. 执行本地构建命令，得到dist文件夹
+   2. 利用ssh2连接远程服务器
+   3. 上传dist文件夹到服务器对应位置，并备份之前的dist文件夹
+   4. 如果上传失败，则恢复之前的dist文件夹
+
+## 前置准备
+   1. 配置服务器ssh免密登录（必须配置，配置后使用ssh登录服务器无需输入密码不会中断执行流程），这个很简单不过多介绍
+   2. node process_child模块执行shell脚本
+   3. ssh2-sftp-client实现ssh连接和文件传输
+
+
+## 核心代码
+- 利用Node的child_process的execSync执行npm run build命令，完成本地打包
+```js
+const { execSync } = require('child_process');
+
+async function compileDist() {
+  try {
+    // 利用child_process执行本地打包命令
+    const result = execSync('npm run build', { stdio: 'inherit' });
+    console.log("打包成功");
+    return Promise.resolve();
+  } catch (error) {
+    console.error(`打包失败: ${error}`);
+    process.exit(0);
+  }
+}
+```
+
+- 利用ssh2连接远程服务器
+这里用到一个[ssh2-sftp-client](https://github.com/theophilusx/ssh2-sftp-client##readme)库，这个库封装了ssh2的api，可以增删改查服务器文件。
+```js
+const Client = require('ssh2-sftp-client');
+async function connectSSh() {
+  let sftp = new Client();
+  sftp.connect({
+    host: xxx, // 服务器 IP
+    port: xxx, // 服务器端口
+    username: xxx, // 用户名
+    password: xxx, // 密码
+  })
+}
+```
+
+## 完整代码
+```js
+// release.js
+const { execSync } = require('child_process');
+const Client = require('ssh2-sftp-client');
+
+// 配置不同环境的变量
+const devConfig = { // 开发环境
+  ip: "xxx.xxx.xx.xx", // 开发环境
+  username: "root", // 用户名
+  port: "22", //端口
+  password: "xxxx@123", // 密码
+  path: '/xx/xx/xxx', // 服务器上要上传包的目录
+  fileName: 'c6_basic', // 项目名
+};
+
+const proConfig = { // 生成环境
+  ip: "xxx.xxx.xx.xx", // 服务器地址
+  username: "xx", // 用户名
+  port: "xx", //端口
+  password: "xxxx@123", // 密码
+  path: '/xx/xx/xxx', // 服务器上要上传包的目录
+  fileName: 'xx', // 项目名
+};
+
+// npm run release dev
+// npm run release pro
+const config = process.argv[2] === 'pro' ? proConfig : devConfig;
+
+const sourceDir = `${__dirname}/${config.fileName}`; //本地源文件目录
+const serviceSourceDir = `${config.path}/${config.fileName}`;  //服务器源文件目录示例:  
+// /opt/static/application/c6_basic
+
+// 执行 npm run build 命令完成本地打包
+async function compileDist() {
+  try {
+    const result = execSync('npm run build', { stdio: 'inherit' });
+    console.log("打包成功");
+    return Promise.resolve();
+  } catch (error) {
+    console.error(`打包失败: ${error}`);
+    process.exit(0);
+  }
+}
+
+// 利用ssh2连接远程服务器并实现上传、备份、回滚
+async function connectSSh() {
+  let sftp = new Client();
+  const timeNow = formatDate(); // 利用时间戳作为备份文件名
+  const backupFilePath = `${serviceSourceDir}_${timeNow}`; //备份文件
+  sftp.connect({
+    host: config.ip, // 服务器 IP
+    port: config.port,
+    username: config.username,
+    password: config.password,
+  })
+    .then(async () => { // 将远程文件重命名备份
+      const isExists = await sftp.exists(serviceSourceDir); // 判断服务器上是否存在项目文件
+      if (isExists) { // 如果文件存在，则重命名为备份文件
+        await sftp.rename(serviceSourceDir, backupFilePath).catch((err) => console.log('备份操作失败', err));
+      } else {
+       // 如果路径不存在，结束进程，让确认路径后再执行
+        console.log(`服务器上${serviceSourceDir}不存在，请先确认目录路径是否正确`);
+        process.exit(0);
+      }
+    })
+    .then(() => { // 创建文件夹
+      return sftp.mkdir(serviceSourceDir, true);
+    })
+    .then(() => {
+      // 上传文件
+      console.log("开始上传");
+      // 创建进度条 并写入
+      // return uploadFileWithProgress(sourceDir, serviceSourceDir, sftp);
+      return sftp.uploadDir(sourceDir, serviceSourceDir);
+    }, async(err) => {
+      console.log(err, '创建文件夹失败');
+      // 恢复备份文件
+      await sftp.rename(backupFilePath, serviceSourceDir).catch((err) => console.log('恢复备份文件失败，请到服务器手动操作', err));
+    })
+    .then(async() => {
+    // 上传文件
+      console.log("上传成功");
+      // 删除备份文件
+      // await sftp.rmdir(backupFilePath, true).catch((err) => console.log('删除备份失败', err));
+    }, (err) => {
+      console.log(err, '上传失败');
+      // 删除已上传上去的部分文件
+      sftp.delete(serviceSourceDir).then(() => {
+      //恢复备份文件
+        sftp.rename(backupFilePath, serviceSourceDir);
+      });
+    })
+    .finally(() => {
+      sftp.end();
+    });
+}
+async function runTask() {
+  await compileDist(); //打包
+  await connectSSh(); //提交上传
+}
+
+function formatDate() {
+  const now = new Date();
+  const year = now.getFullYear(); // 获取年份
+  const month = String(now.getMonth() + 1).padStart(2, '0'); // 获取月份，并补零
+  const day = String(now.getDate()).padStart(2, '0'); // 获取日期，并补零
+  const hours = String(now.getHours()).padStart(2, '0'); // 获取小时，并补零
+  const minutes = String(now.getMinutes()).padStart(2, '0'); // 获取分钟，并补零
+  const seconds = String(now.getSeconds()).padStart(2, '0'); // 获取秒，并补零
+  // 按照指定格式拼接字符串
+  return `${year}:${month}:${day}-${hours}:${minutes}:${seconds}`;
+}
+
+runTask();
+```
+## 把运行脚本的命令加到的package.json中
+```json
+"scripts": {
+    "release-dev": "node ./release dev", // 注意路径，根据自己文件位置调整
+    "release-prod": "node ./release pro", // 注意路径，根据自己文件位置调整
+},
+```
+## 进一步可优化的点
+  1. 目前是通过ssh2-sftp-client的文件传输功能将打包后的文件传输到指定的服务器目录，但是没有对传输的文件进行压缩
+  2. 只测试了Windows系统，可能不支持其他系统
+  3. 没有添加文件传输实时进度条

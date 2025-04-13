@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ImageAssets } from "@/constants";
+import { ImageAssets } from "@/lib/constants";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 // import { getDictionary } from '@/app/(root)/dictionaries'

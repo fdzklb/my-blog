@@ -1,7 +1,7 @@
 "use client";
 
 /* eslint-disable no-console */
-import { ASCII_ART_FONT, NICKNAME, SOURCE_CODE_GITHUB_PAGE } from "@/constants";
+import { ASCII_ART_FONT, NICKNAME, SOURCE_CODE_GITHUB_PAGE } from "@/lib/constants";
 import { isBrowser } from "@/lib/utils";
 
 const fontFamily =

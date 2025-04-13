@@ -2,35 +2,56 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { MDXRemote } from 'next-mdx-remote/rsc'
-import { highlight } from 'sugar-high'
-
 import { Button  } from '@/components/ui/button'
+import Code from './Code'
+import RotateAlbum from '@/components/blog/articles/RotateAlbum'
+// 将markdown链接格式转换为HTML a标签
+function convertMarkdownLinksToHTML(text: string): string {
+  const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/;
+  // 如果没有匹配到链接格式，直接返回原文本
+  if (!linkRegex.test(text)) {
+    return text;
+  }
+  // 替换所有符合markdown链接格式的文本
+  let result = text;
+  let match;
+  // 使用while循环持续匹配所有符合条件的链接
+  while ((match = linkRegex.exec(result)) !== null) {
+    const [fullMatch, title, url] = match;
+    const replacement = `<a target="_blank" rel="noopener noreferrer" href="${url}">${title}</a>`;
+    result = result.slice(0, match.index) + replacement + result.slice(match.index + fullMatch.length);
+    // 重置lastIndex以避免无限循环
+    linkRegex.lastIndex = match.index + replacement.length;
+  }
+  return result;
+}
 
-function Table({ data }) {
-  let headers = data.headers.map((header, index) => (
-    <th key={index}>{header}</th>
+
+function Table({ headers, rows }) {
+  let Headers = headers.map((header, index) => (
+    <td key={index} dangerouslySetInnerHTML={{ __html: convertMarkdownLinksToHTML(header) }} />
   ))
-  let rows = data.rows.map((row, index) => (
+  let Rows = rows.map((row, index) => (
     <tr key={index}>
       {row.map((cell, cellIndex) => (
-        <td key={cellIndex}>{cell}</td>
-      ))}
+          <td key={cellIndex} dangerouslySetInnerHTML={{ __html: convertMarkdownLinksToHTML(cell) }} />
+        )
+      )}
     </tr>
   ))
 
   return (
     <table>
       <thead>
-        <tr>{headers}</tr>
+        <tr>{Headers}</tr>
       </thead>
-      <tbody>{rows}</tbody>
+      <tbody>{Rows}</tbody>
     </table>
   )
 }
 
 function CustomLink(props) {
   let href = props.href
-
   if (href.startsWith('/')) {
     return (
       <Link href={href} {...props}>
@@ -50,11 +71,6 @@ function RoundedImage(props) {
   return <Image alt={props.alt} className="rounded-lg" {...props} />
 }
 
-function Code({ children, ...props }) {
-  let codeHTML = highlight(children)
-  return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />
-}
-
 function slugify(str) {
   return str
     .toString()
@@ -62,7 +78,7 @@ function slugify(str) {
     .trim() // Remove whitespace from both ends of a string
     .replace(/\s+/g, '-') // Replace spaces with -
     .replace(/&/g, '-and-') // Replace & with 'and'
-    .replace(/[^\w\-]+/g, '') // Remove all non-word characters except for -
+    // .replace(/[^\w\-]+/g, '') // Remove all non-word characters except for -
     .replace(/\-\-+/g, '-') // Replace multiple - with single -
 }
 
@@ -99,7 +115,8 @@ let components = {
   a: CustomLink,
   code: Code,
   Table,
-  Button
+  Button,
+  RotateAlbum,
 }
 
 export function CustomMDX(props) {

@@ -3,7 +3,7 @@ import * as React from "react";
 import { type SetState } from "ahooks/lib/useSetState";
 import { Ellipsis } from "lucide-react";
 
-import { PAGE_SIZE_OPTIONS } from "@/constants";
+import { PAGE_SIZE_OPTIONS } from "@/lib/constants";
 
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";

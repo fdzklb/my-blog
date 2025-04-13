@@ -30,7 +30,7 @@ export const BlogList = async ({ blogs, lang }: BlogListProps) => {
   }
 
   return (
-    <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-10">
+    <ul className="grid grid-cols-1 sm:grid-cols-2 wrapper:grid-cols-3 2xl:grid-cols-4 gap-10">
       {blogs.map((el, idx) => (
         <li
           key={el.slug}

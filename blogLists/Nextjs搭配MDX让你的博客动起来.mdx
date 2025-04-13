@@ -1,0 +1,46 @@
+---
+title: "Nextjs+MDX让你的博客动起来"
+date: "2025-03-30"
+description: "生日小礼物，打造程序员专属小浪漫,"
+bgImgPath: "/imgs/album.png"
+categories: "前端"
+---
+
+## MDX解决的问题
+  在MDX出现之前，我们使用markdown来写博客，但是markdown只有静态的表示能力，无法实现一些比较复杂的功能。例如当我们需要在演示交互式图表或者组件效果，
+  markdown就无法帮我们实现。而MDX能在 Markdown 格式的内容中插入 JSX 代码， 在演示交互式图表或弹窗，可以直接将它们嵌入到所书写的内容当中。
+
+## MDX 示例
+ - [MDX官方示例](https://mdxjs.com/)
+ ### 本地示例-直接在markdown中插入组件
+
+```jsx
+// xxx.mdx文件
+import { RotateAlbum } from "@/components/album";
+// 旋转相册
+<RotateAlbum/>
+```
+<RotateAlbum/>
+
+## 在Nextjs中使用MDX
+### 方式一：使用 @next/mdx 插件
+  使用 @next/mdx 加配置next.config.js完成整合,这种方式的好处是可以直接导入作为组件，无需手动去解析mdx文件内容，
+  Next在背后已经处理了Markdown和React组件到HTML的全过程，具体配置见[官方文档](https://nextjs.org/docs/app/building-your-application/configuring/mdx)
+  ```jsx
+  import Welcome from '@/markdown/welcome.mdx' // 直接将mdx文件作为组件导入
+  export default function Page() {
+    return <Welcome />
+  }
+  ```
+  你甚至可以为每个mdx文件创建一个以文件路径为路由的访问url，具体配置见[官方文档](https://nextjs.org/docs/app/building-your-application/configuring/mdx#using-file-based-routing)
+
+  my-project
+  ├── app
+  │   └── mdx-page
+  │       └── page.(mdx/md)
+  |── mdx-components.(tsx/js)
+  └── package.json
+
+  在浏览器中直接导航到/mdx-page就可以访问到该页面。
+
+  但是这种方式仅限于解析本地的mdx(md)文件，无法解析远程的mdx(md)文件。

@@ -1,0 +1,138 @@
+---
+title: "(第四章)浏览器插件开发(附源码)"
+date: "2024-12-12"
+description: "Content Script(内容脚本) 与插件其他部分的通信"
+bgImgPath: "/imgs/946.jpg"
+categories: "前端"
+---
+
+
+## Content Script(内容脚本) 的通信方式
+
+由于内容脚本运行在网页中，而不是在浏览器插件的环境，当内容脚本需要和插件其他部分交换信息时就涉及到通信。
+
+通信的方式包括用于**一次性请求**的简单通信和用于**长期连接**的长连接通信。
+
+### 一次性请求通信
+
+#### 情形一：插件其他部分发送**一次性**消息到 Content Script(内容脚本)
+
+插件其他部分利用[chrome.tabs.sendMessage](https://developer.chrome.google.cn/docs/extensions/reference/api/tabs?hl=zh-cn#method-sendMessage)来发送消息。
+
+但是在向内容脚本发送消息之前，内容脚本可能会生效在多个 tab 页面，我们需要知道向哪个 tab 页的内容脚本发送消息。我们先需要利用[chrome.tabs.query](https://developer.chrome.google.cn/docs/extensions/mv2/reference/tabs?hl=zh-cn#method-query)来获取并筛选标签页，找到我们的目标标签页之后再向内容脚本发送消息。
+
+```js
+// popup/popup.js
+// 获取当前活动的标签页
+// active: true表示标签页处于活动状态，
+// currentWindow: true表示标签页位于当前窗口中
+const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+// 向content_script发送消息
+const response = await chrome.tabs.sendMessage(tab.id, { color: "red" });
+console.log(response);
+```
+
+#### Content Script 接收插件其他部分发来的一次性消息
+
+我们可以利用[chrome.runtime.onMessage](https://developer.chrome.google.cn/docs/extensions/reference/runtime?hl=zh-cn#event-onMessage)来接收消息。(**接收一次性消息时，插件其他部分和内容脚本都是用该api进行消息接收**)
+
+```js
+// scripts/content.js
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  sendResponse({ message: `已接受到popup的消息,颜色为${request.color}` });
+  // 设置背景色
+  setBgColor(request.color);
+});
+
+const setBgColor = (color) => {
+  document.body.style.backgroundColor = color;
+};
+```
+
+#### 情形二：Content Script(内容脚本) 中发送一次性信息到插件其他部分
+
+```js
+// scripts/content.js
+const response = await chrome.runtime.sendMessage({ message: "popup你好" });
+console.log(response);
+```
+
+需要注意的是：sendResponse 是同步调用的，如果想要在异步调用需要在 onMessage 的事件处理函数中添加 return true;
+
+```js
+// scripts/content.js
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  setTimeout(() => {
+    sendResponse({
+      message: `已接受到消息,并完成设置背景色颜色为${request.color}`,
+    });
+    setBgColor(request.color);
+  }, 2000);
+  return true;
+});
+
+const setBgColor = (color) => {
+  document.body.style.backgroundColor = color;
+};
+```
+
+### 长期连接通信
+
+#### 情形一：在 Content Script(内容脚本) 中主动发起长期连接通信
+
+在 Content Script(内容脚本) 中，我们可以利用[chrome.runtime.connect()](https://developer.chrome.google.cn/docs/extensions/reference/api/runtime?hl=zh-cn#method-connect)来建立连接。
+建立连接时，每个端都会分配一个 runtime.Port 对象，以便通过该连接发送和接收消息。
+
+```js
+// scripts/content.js
+const port = chrome.runtime.connect({ name: "建立与popup的连接" }); //建立连接
+port.postMessage({ answer: "popup你好" }); //发送消息
+
+// 通过port.onMessage.addListener接收消息
+port.onMessage.addListener(function (msg) {
+  if (msg.question === "你是坤坤吗？")
+    port.postMessage({ answer: "我是content_script" });
+  else if (msg.question === "别来烦我")
+    port.postMessage({ answer: "好的，再见" });
+});
+```
+
+#### 情形二：在插件其他部分中主动发起长期连接通信
+在插件其他部分利用[chrome.runtime.onConnect()](https://developer.chrome.google.cn/docs/extensions/reference/api/tabs?hl=zh-cn#method-connect)来建立连接。
+
+```js
+// popup/popup.js
+const port = chrome.tabs.connect({ name: "建立与坤坤的连接" }); //建立连接
+port.postMessage({ question: "坤坤你在哪？" }); //发送消息
+// 通过port.onMessage.addListener接收消息
+port.onMessage.addListener(function (msg) {
+  if (msg.answer === "popup你好")
+    port.postMessage({ question: "你是坤坤吗？" });
+  else if (msg.answer === "我是content_script")
+    port.postMessage({ question: "别来烦我" });
+  else if (msg.answer === "好的，再见")
+    port.postMessage({ question: "坤坤你在哪？" });
+});
+```
+
+
+#### 接收长期连接的消息
+如果仅仅只是接受长连接的消息，则无需创建连接，直接使用chrome.runtime.onConnect.addListener()来监听信息即可
+```js
+// #长通信
+chrome.runtime.onConnect.addListener(function(port) {
+    port.onMessage.addListener(function(msg) {
+        console.log(`content_script收到的消息：${msg}`);
+        if (msg.question === "坤坤你在哪？")
+          port.postMessage({answer: "你好"});
+        else if (msg.question === "你是坤坤吗？")
+          port.postMessage({answer: "我是content_script"});
+        else if (msg.question === "我找坤坤， 坤坤你在哪？")
+          port.postMessage({answer: "他跳舞去了"});
+      });
+  });
+
+```
+
+## 实例演示
+[源码](https://gitee.com/Leo-dazhenfang/browser-plug-indevelopment/tree/master/(%E7%AC%AC%E5%9B%9B%E7%AB%A0)%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91(%E9%99%84%E6%BA%90%E7%A0%81)%EF%BC%9AContent%20Script%E4%B8%8E%E5%85%B6%E4%BB%96%E9%83%A8%E5%88%86%E7%9A%84%E9%80%9A%E4%BF%A1)

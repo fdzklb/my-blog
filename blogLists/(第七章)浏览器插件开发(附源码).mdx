@@ -1,0 +1,48 @@
+
+---
+title: "(第七章)浏览器插件开发(附源码)"
+date: "2025-3-17"
+description: "实战-利用plasmo框架开发浏览器插件"
+bgImgPath: "/imgs/v3.png"
+categories: "前端"
+---
+
+## 视频网站字幕提取浏览器插件(预期功能)
+一个强大的 Chrome 浏览器扩展，结合AI的强大翻译功能和视频处理能力，为非母语者提供强大的翻译功能，为语言学习者提供多功能语言学习笔记等功能。
+[项目地址](https://github.com/fdzklb/bilibili-vue)
+## 插件功能
+  ### 已实现(针对b站视频)
+   - b站视频字幕(得有字幕)的下载
+   - 切成片段，可进行循环播放，倍速播放
+   - 实时同步字幕和视频进度
+   - 针对语言学习者有默写以及校验默写是否正确，和做笔记功能
+   - 支持导出字幕、默写内容、笔记内容
+   ![已实现](/blogs/v3-6/img/1.png)
+
+
+  ### 开发中
+  - 适配更多的平台，如油管，奈非，腾讯视频等
+  - 支持针对无字幕的视频导入字幕文件
+  - 支持本地持久化存储(下次打开同样视频之前的笔记内容都能显示)
+  - 接入大模型，进行视频内容总结
+  - 利用大模型实现语言转文字，适配所有无字幕的视频
+
+## 🛠️ 技术栈
+- **框架:** vue3 + TypeScript
+- **扩展框架:** [WXT](https://wxt.dev/)
+- **样式:** [Tailwind CSS](https://www.tailwindcss.cn/docs/installation)
+- **UI 组件:** [Shadcn-Vue](https://shadcn-vue.com/)
+- **图标:** Lucide Vue
+
+## b站字幕文件的格式
+![字幕文件格式](/blogs/v3-6/img/6.png)
+from: 开始时间
+to: 结束时间
+content: 字幕内容
+
+## 相关资料
+ [b站api文档](https://github.com/SocialSisterYi/bilibili-API-collect)
+ [youtube 字幕下载](https://github.com/minhphuc010194/auto-download-subtitles-playlist-youtube/blob/main/src/index.js)
+
+ [类似产品哔哔君](https://github.com/IndieKKY/bilibili-subtitle)
+ [Bibigpt] (https://bibigpt.co/)
