@@ -1,5 +1,5 @@
 import { IntroScrollMouse } from "@/components/intro-scroll-mouse";
-import { HeroSectionZH, HeroSectionEN } from "@/features/home";
+import { HeroSectionZH, HeroSectionEN } from "@/components/home";
 
 export const revalidate = 60;
 

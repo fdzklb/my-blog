@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { Button  } from '@/components/ui/button'
+import { Card, CardContent  } from '@/components/ui/card'
 import Code from './Code'
 import RotateAlbum from '@/components/blog/articles/RotateAlbum'
 // 将markdown链接格式转换为HTML a标签
@@ -27,7 +28,7 @@ function convertMarkdownLinksToHTML(text: string): string {
 }
 
 
-function Table({ headers, rows }) {
+function Table({ headers, rows }: { headers: string[], rows: string[][] }) {
   let Headers = headers.map((header, index) => (
     <td key={index} dangerouslySetInnerHTML={{ __html: convertMarkdownLinksToHTML(header) }} />
   ))
@@ -50,7 +51,7 @@ function Table({ headers, rows }) {
   )
 }
 
-function CustomLink(props) {
+function CustomLink(props: any) {
   let href = props.href
   if (href.startsWith('/')) {
     return (
@@ -67,11 +68,11 @@ function CustomLink(props) {
   return <a target="_blank" rel="noopener noreferrer" {...props} />
 }
 
-function RoundedImage(props) {
+function RoundedImage(props: any) {
   return <Image alt={props.alt} className="rounded-lg" {...props} />
 }
 
-function slugify(str) {
+function slugify(str: string) {
   return str
     .toString()
     .toLowerCase()
@@ -82,8 +83,8 @@ function slugify(str) {
     .replace(/\-\-+/g, '-') // Replace multiple - with single -
 }
 
-function createHeading(level) {
-  const Heading = ({ children }) => {
+function createHeading(level: number) {
+  const Heading = ({ children }: { children: string }) => {
     let slug = slugify(children)
     return React.createElement(
       `h${level}`,
@@ -117,9 +118,10 @@ let components = {
   Table,
   Button,
   RotateAlbum,
+  Card, CardContent
 }
 
-export function CustomMDX(props) {
+export function CustomMDX(props: any) {
   return (
     <MDXRemote
       {...props}

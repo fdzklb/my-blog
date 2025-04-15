@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import * as React from "react";
 import "@/styles/global.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { isProdction } from "@/lib/utils";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
@@ -30,6 +32,8 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
             {children}
           </TooltipProvider>
       </body>
+      {isProdction() && <GoogleAnalytics gaId="G-V23LE3L362" />}
+
     </html>
   );
 }

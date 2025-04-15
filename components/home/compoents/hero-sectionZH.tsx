@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { TypeIntro } from "@/features/home";
+import { TypeIntro } from "@/components/home";
 import { cn } from "@/lib/utils";
 import { SocialMediaList } from "./social-media";
 import { getDictionary } from '@/app/(root)/dictionaries'
 
 
-export const HeroSectionEN = async () => {
-  const dict = await getDictionary('en')
+export const HeroSectionZH = async () => {
+  const dict = await getDictionary('zh')
   
   let delay = 0;
   // 每次调用，增加延时
@@ -21,7 +21,7 @@ export const HeroSectionEN = async () => {
           animationDelay: `${getDelay()}ms`,
         }}
       >
-        HI, I'm
+        你好，我是
       </p>
       <strong
         className={cn(
@@ -41,34 +41,32 @@ export const HeroSectionEN = async () => {
           animationDelay: `${getDelay()}ms`,
         }}
       >
-        <TypeIntro lang="en"/>
-      </div>
+        <TypeIntro lang="zh"/>
+        </div>
       <p
         className={cn(
-          "text-2xl md:text-5xl tracking-widest",
+          "text-2xl md:text-3xl 2xl:text-4xl tracking-widest",
           "animate-fade-up animate-ease-in-out",
         )}
         style={{
           animationDelay: `${getDelay()}ms`,
         }}
       >
-        Like
+        喜欢
         <span className={`font-semibold text-[#00d8ff]`}>React</span>、
-        <span className={`font-semibold text-[#00d8ff]`}>NextJs</span>、
-        <span className={`font-semibold text-[#007acc]`}>TypeScript</span>
+        <span className={`font-semibold text-[#007acc]`}>NextJS</span>
         <span className="ml-4">\owo/ ~</span>
       </p>
       <p
         className={cn(
-          "text-base md:text-2xl text-muted-foreground tracking-widest",
+          "text-base md:text-xl text-muted-foreground tracking-widest",
           "animate-fade-up animate-ease-in-out",
         )}
         style={{
           animationDelay: `${getDelay()}ms`,
         }}
       >
-        I record my growth on this website, and strive 💪 to become a better
-        programmer.
+        我在这个网站记录我的成长，努力 💪 成为一个更好的程序员。
       </p>
       <div
         className={cn("flex space-x-4", "animate-fade-up animate-ease-in-out")}
@@ -76,20 +74,20 @@ export const HeroSectionEN = async () => {
           animationDelay: `${getDelay()}ms`,
         }}
       >
-        {/* <Link
+        <Link
           href={dict.paths.site_blog.link}
           className={cn(buttonVariants({ variant: "outline" }))}
         >
-          My Blog
+          我的博客
         </Link>
         <Link
           href={dict.paths.site_about.link}
           className={cn(buttonVariants({ variant: "outline" }))}
         >
-          About Me
-        </Link> */}
+          关于我
+        </Link>
       </div>
-      <SocialMediaList lang="en" delay={delay} />
+      <SocialMediaList lang="zh" delay={delay} />
     </div>
   );
 };

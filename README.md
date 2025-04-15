@@ -3,17 +3,26 @@
 使用NextJS 15 App Router 版本，结合TypeScript、Shadcn UI、Tailwind、MDX(MD)、Postgresql、Prisma等技术构建的博客系统。
 
 - NextJS 15 App Router + React 19 hooks，完美支持 SSR
-- 支持`中英`多语言切换
-- 使用mdx、md构建博客内容,并转成html格式
+
+使用 TypeScript 编写，提供类型安全性和更好的开发体验
+
+- 支持`中英`双语言语言
+
+- 使用mdx构建博客内容
+
 - 使用Prisma+Postgresql构建数据库
+
 - 使用Vercel部署
-- 样式适配手机、平板、PC等设备
+
+- 响应式设计 适配手机、平板、PC等设备
+
+- 使用 next-sitemap 生成全站 sitemap ，SEO 友好
+
+- 使用 ahooks 提升开发效率
 
 
 ## ✨ 预览
 [预览地址](https://fangdada.vercel.app)
-
-## 📁 项目结构
 
 
 ## 🚀 快速开始

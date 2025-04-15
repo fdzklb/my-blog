@@ -32,15 +32,37 @@ import { RotateAlbum } from "@/components/album";
     return <Welcome />
   }
   ```
-  你甚至可以为每个mdx文件创建一个以文件路径为路由的访问url，具体配置见[官方文档](https://nextjs.org/docs/app/building-your-application/configuring/mdx#using-file-based-routing)
+你甚至可以为每个mdx文件创建一个以文件路径为路由的访问url，具体配置见[官方文档](https://nextjs.org/docs/app/building-your-application/configuring/mdx#using-file-based-routing)
 
-  my-project
-  ├── app
-  │   └── mdx-page
-  │       └── page.(mdx/md)
-  |── mdx-components.(tsx/js)
-  └── package.json
+my-project  
+├── app  
+│   └── mdx-page  
+│       └── page.(mdx/md)  
+|── mdx-components.(tsx/js)  
+└── package.json  
 
-  在浏览器中直接导航到/mdx-page就可以访问到该页面。
+在浏览器中直接导航到/mdx-page就可以访问到该页面。
 
-  但是这种方式仅限于解析本地的mdx(md)文件，无法解析远程的mdx(md)文件。
+但是这种方式仅限于解析本地的mdx(md)文件，无法解析远程的mdx(md)文件。另外元素据的导出只能通过 export metadata = {} 这种方式导出。
+
+如果你的元数据不是通过export导出，你可能需要改成这种方式的方式导出，因为@next/mdx默认不支持提取这种格式的元数据(@next/mdx does **not** support frontmatter by default)，这也是使用 @next/mdx 插件的一个缺点。对于已经拥有大量md文件的项目来说，去手动改造也是有成本的。
+
+### 方式二：使用 next-mdx-remote 插件
+
+  如果你的mdx文件在远程服务器上或者数据库中，next-mdx-remote是更好的选择。
+
+
+  ```JSX
+  import { MDXRemote } from 'next-mdx-remote/rsc'
+ 
+  export default async function RemoteMdxPage() {
+    // MDX text - can be from a database, CMS, fetch, anywhere...
+    const res = await fetch('https://...')
+    const markdown = await res.text()
+    // 对markdown做一些特殊处理
+    const transformedMarkdown = transform(markdown)
+    return <MDXRemote source={transformedMarkdown} />
+  }
+  ```
+
+  另外你在获取到mdx文件内容之后，可以对内容做一些特殊处理后(比如提取元数据、配置图片CDN地址等)再进行渲染，这种方式拥有更多的灵活性。

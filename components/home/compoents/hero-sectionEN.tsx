@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { TypeIntro } from "@/features/home";
+import { TypeIntro } from "@/components/home";
 import { cn } from "@/lib/utils";
 import { SocialMediaList } from "./social-media";
 import { getDictionary } from '@/app/(root)/dictionaries'
 
 
-export const HeroSectionZH = async () => {
-  const dict = await getDictionary('zh')
+export const HeroSectionEN = async () => {
+  const dict = await getDictionary('en')
   
   let delay = 0;
   // 每次调用，增加延时
@@ -21,7 +21,7 @@ export const HeroSectionZH = async () => {
           animationDelay: `${getDelay()}ms`,
         }}
       >
-        你好，我是
+        HI, I'm
       </p>
       <strong
         className={cn(
@@ -41,8 +41,8 @@ export const HeroSectionZH = async () => {
           animationDelay: `${getDelay()}ms`,
         }}
       >
-        <TypeIntro lang="zh"/>
-        </div>
+        <TypeIntro lang="en"/>
+      </div>
       <p
         className={cn(
           "text-2xl md:text-5xl tracking-widest",
@@ -52,8 +52,9 @@ export const HeroSectionZH = async () => {
           animationDelay: `${getDelay()}ms`,
         }}
       >
-        喜欢
+        Like
         <span className={`font-semibold text-[#00d8ff]`}>React</span>、
+        <span className={`font-semibold text-[#00d8ff]`}>NextJs</span>、
         <span className={`font-semibold text-[#007acc]`}>TypeScript</span>
         <span className="ml-4">\owo/ ~</span>
       </p>
@@ -66,7 +67,8 @@ export const HeroSectionZH = async () => {
           animationDelay: `${getDelay()}ms`,
         }}
       >
-        我在这个网站记录我的成长，努力 💪 成为一个更好的程序员。
+        I record my growth on this website, and strive 💪 to become a better
+        programmer.
       </p>
       <div
         className={cn("flex space-x-4", "animate-fade-up animate-ease-in-out")}
@@ -74,20 +76,20 @@ export const HeroSectionZH = async () => {
           animationDelay: `${getDelay()}ms`,
         }}
       >
-        <Link
+        {/* <Link
           href={dict.paths.site_blog.link}
           className={cn(buttonVariants({ variant: "outline" }))}
         >
-          我的博客
+          My Blog
         </Link>
         <Link
           href={dict.paths.site_about.link}
           className={cn(buttonVariants({ variant: "outline" }))}
         >
-          关于我
-        </Link>
+          About Me
+        </Link> */}
       </div>
-      <SocialMediaList lang="zh" delay={delay} />
+      <SocialMediaList lang="en" delay={delay} />
     </div>
   );
 };

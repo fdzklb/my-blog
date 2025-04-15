@@ -6,7 +6,8 @@ import { TypeAnimation } from "react-type-animation";
 export const TypeIntro = ({ lang }: { lang: string }) => {
   return (
     <TypeAnimation
-      className="text-2xl tracking-widest md:text-5xl"
+      preRenderFirstString={true}
+      className="text-2xl tracking-widest md:text-3xl 2xl:text-4xl"
       sequence={[
         500,
         lang === "zh" ? "一名前端开发工程师 。" : "A Full Stack <Developer /> .",

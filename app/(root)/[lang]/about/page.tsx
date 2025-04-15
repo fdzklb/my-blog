@@ -33,7 +33,7 @@ import {
   IconSkillTypeScript,
 } from "@/components/icons";
 
-import { SocialMediaList } from "@/features/home";
+import { SocialMediaList } from "@/components/home";
 import { getDictionary } from "@/app/(root)/dictionaries";
 export const revalidate = 60;
 

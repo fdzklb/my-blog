@@ -1,0 +1,118 @@
+---
+title: "CSS中相对单位的辨析和使用"
+date: "2024-09-18"
+description: "本章将解释相对单位(px、em、rem)给CSS带来的独特价值，然后演示它们的工作原理，最后演示如何恰当的使用他们，使我们的css代码更清晰简单"
+bgImgPath: "/imgs/pic9.webp"
+categories: "前端"
+---
+
+## 引言
+在早期的计算机应用开发程序（以及传统的出版行业）中，开发人员（或者出版商）明确知道其媒介的限制。
+一个典型的程序可能是一个打印程序，它将输出到纸张上。在这种情况下，开发人员知道纸张的大小，并且知道如何将内容放置在纸张上。
+但是在Web环境下，用户可以设置浏览器窗口的大小，而CSS必须适应这种窗口大小，另外用户还可以自动缩放页面大小。这需要css能够兼顾更多情况。
+
+## px
+CSS支持几种绝对长度单位，最常用、最基础的是像素（px）​。不常用的绝对单位是mm（毫米）​、cm（厘米）​、in（英寸）​、pt（点，印刷术语，1/72英寸）​、pc（派卡，印刷术语，12点）​。这些单位都可以通过公式互相换算：1in = 25.4mm = 2.54cm = 6pc = 72pt = 96px。因此，16px等于12pt（16/96×72）。  
+
+需要注意的是CSS像素并不严格等于显示器的像素，通常情况下px是绝对长度单位，96px等于一个物理英寸的大小。但是CSS单位会根据浏览器、操作系统或者硬件适当缩放，在某些设备或者用户的分辨率设置下也会发生变化。  
+
+比如苹果iPhone 14 Pro的物理分辨率为1179 x 2556像素，像素密度为460ppi(每英寸460个物理像素点)，所以通常情况下iPhone 14 Pro的CSS像素和物理像素的比例是460/96≈5(5个物理像素点长度=1px)，
+所以iPhone 14 Pro的CSS尺寸应该为268.8x603.2px。但是苹果操作系统设置了DPR(设备像素比)为3(3物理像素点长度=1px)，所以实际上iPhone 14 Pro的CSS像素为393x852px。
+
+## em
+在CSS中，em是相对长度单位，1em等于**当前元素**的字号，其准确值取决于作用的元素。  
+
+注意：em是始终相对于自身元素的字体大小，而不是父元素的字体大小。如果本身没有定义字体大小，那么本身的字体大小会继承父元素的字体大小。这看起来似乎是相对于父元素的字体大小，但是实际上依然是相对于自身元素的字体大小。
+```html
+<div style="font-size: 16px;">
+  <div style="font-size: 2em;">2em</div>
+  <div style="font-size: 1em;">1em</div>
+  <div style="font-size: 0.5em;">0.5em</div>
+</div>
+```
+  <Card>
+   <CardContent>
+      <div style={{ fontSize: '16px' }}>
+        <div style={{ fontSize: '2em' }}>2em</div>
+        <div style={{ fontSize: '1em' }}>1em</div>
+        <div style={{ fontSize: '0.5em' }}>0.5em</div>
+      </div>
+   </CardContent>
+  </Card>
+
+### em的使用场景
+  #### 设置padding、height、width、border-radius等属性  
+  利用em设置边距、高度、宽度、圆角等属性时，因为当元素继承了不同的字号，或者用户改变了字体设置时，这些属性会跟着元素均匀地缩放。
+  <Card>
+   <CardContent>
+   <span style={{ fontSize: '12px', display: 'inlin-block', border: '1em solid #FF6A00', borderRadius: '0.5em' }} >small</span>
+   <span style={{ marginLeft: '2em', fontSize: '18px', display: 'inlin-block', border: '1em solid #FF6A00', borderRadius: '0.5em' }} >small</span>
+   </CardContent>
+  </Card>
+
+  ```jsx
+     <span style={{ fontSize: '12px', display: 'inlin-block', border: '1em solid #FF6A00', borderRadius: '0.5em' }} >small</span>
+     <span style={{ fontSize: '18px', display: 'inlin-block', border: '1em solid #FF6A00', borderRadius: '0.5em' }} >small</span>
+  ```
+
+  #### 使用em定义字号
+  利用em设置字体大小时，需要避免给多重嵌套的元素使用em定义字号，因为font-size属性是继承的，所以如果给多重嵌套的元素使用em定义字号，那么字体大小会随着嵌套的层级而缩放，这可能会导致一些问题。
+
+## rem
+因为em在设置字体大小时的嵌套导致字体失控问题，让很多开发者对em用来设置字体大小而望而生畏，恰好rem替我们解决了这个问题。
+rem是CSS3新增的一个相对长度单位，是root em的缩写，它相对于根元素（通常是html元素）的字体大小。
+
+当浏览器解析HTML文档时，会在内存里将页面的所有元素表示为DOM（文档对象模型）​。它是一个树结构，其中每个元素都由一个节点表示。html元素是顶级（根）节点。它下面是子节点，head和body。再下面是逐级嵌套的后代节点。
+
+在文档中，根节点是所有其他元素的祖先节点。根节点有一个伪类选择器（:root）​，可以用来选中它自己。这等价于类型选择器html，但是html的优先级相当于一个类名，而不是一个标签。
+
+一般会用rem设置字号，用px设置边框，用em设置其他大部分属性，尤其是内边距、外边距和圆角（不过也可以用百分比设置容器宽度）​。这样字号是可预测的，同时还能在其他因素改变元素字号时，借助em缩放内外边距。
+
+## vh vw vmin vmax
+视口——浏览器窗口里网页可见部分的边框区域。它不包括浏览器的地址栏、工具栏、状态栏
+
+vh是相对于视口高度的单位，1vh等于视口高度的1%。
+
+vw是相对于视口宽度的单位，1vw等于视口宽度的1%。
+
+vmin是相对于视口高度和宽度中的较小值的单位，1vmin等于较小值的1%。
+
+vmax是相对于视口高度和宽度中的较大值的单位，1vmax等于较大值的1%。
+
+比如，50vw等于视口宽度的一半，25vh等于视口高度的25%。vmin取决于宽和高中较小的一方，这可以保证元素在屏幕方向变化时适应屏幕。在横屏时，vmin取决于高度；在竖屏时，则取决于宽度。
+
+vmin的典型使用场景是在手机或者平板上自适应展示侧边栏。
+
+### 使用vw + calc（）定义字号
+在适配多种终端设备时，使用vw定义字号是非常有用的。因为vw是相对于视口宽度的单位，所以它可以根据屏幕大小自适应。
+
+例如：font-size: calc(1vw + 0.5em)​
+打开网页，慢慢缩放浏览器，字体会平滑地缩放。0.5em保证了最小字号，1vw则确保了字体会随着视口缩放。这段代码保证基础字号从iPhone 6里的11.75px一直过渡到1200px的浏览器窗口里的20px
+
+我们不用媒体查询就实现了大部分的响应式策略。省掉三四个硬编码的断点，网页上的内容也能根据视口流畅地缩放。
+
+### line-height
+有些属性允许无单位的值（即一个不指定单位的数）​。支持这种值的属性包括line-height、z-index、font-weight（700等于bold,400等于normal，等等）​。
+line-height属性比较特殊，它的值既可以有单位也可以无单位。通常我们应该使用无单位的数值，因为它们继承的方式不一样。
+
+```css
+body {
+  line-height: 1.5;
+  font-size: 16px;
+}
+
+.about {
+  font-size: 2em;
+  // 已经继承了body的line-height: 1.5，因为font-size是继承的，about的font-size是2*16=32px，所以line-height是32*1.5=48px
+}
+```
+
+<Card>
+  <CardContent>
+    <div style={{ lineHeight: '1.5', fontSize: '16px' }}>
+      <div style={{ fontSize: '2em' }}>已经继承了body的line-height: 1.5，因为font-size是继承的，about的font-size是2*16=32px，所以line-height是32*1.5=48px</div>
+    </div>
+  </CardContent>
+</Card>
+
+使用无单位的数值时，继承的是声明值，即在每个继承子元素上会重新算它的计算值，通过无单位的值来设置line-height，可以避免因为字体变化而出现重叠和间距过大的现象。

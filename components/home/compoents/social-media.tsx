@@ -29,11 +29,11 @@ export const SocialMediaList = async ({
   const getDelay = () => (delay += 200);
   const dict = await getDictionary(lang);
   const socialMediaList = [
-    {
-      icon: <IconBrandGithub className="text-base" />,
-      label: "Github",
-      link: dict.info.github_page,
-    },
+    // {
+    //   icon: <IconBrandGithub className="text-base" />,
+    //   label: "Github",
+    //   link: dict.info.github_page,
+    // },
     {
       icon: <IconSkillGmailDark className="text-base dark:hidden" />,
       label: "Gmail",

@@ -6,16 +6,17 @@ export async function GET() {
       select: { title: true, categories: true, slug: true, description: true },
       orderBy: [{ view_count: "desc" }],
     });
-
     return Response.json(data);
   } catch (error) {
     console.error("Database Error...", error);
-    throw new Error("Failed to fetch the popular posts");
+    throw new Error("Failed to fetch the posts");
   }
 }
 
 export async function POST(request: Request) {
   const { slug, title, categories, description, date } = await request.json();
+
+  console.log(slug, title, categories, description, date);
 
   try {
     const existingPost = await db.blog.findUnique({

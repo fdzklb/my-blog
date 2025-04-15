@@ -2,7 +2,6 @@ import { type ClassValue, clsx } from "clsx";
 import dayjs from "dayjs";
 import "dayjs/locale/zh-cn";
 import relativeTime from "dayjs/plugin/relativeTime";
-import slugify from "slugify";
 import { twMerge } from "tailwind-merge";
 
 import { showErrorToast, showSuccessToast } from "@/components/ui/toast";
@@ -27,8 +26,9 @@ export const isBrowser = () => {
 };
 
 
+export const isProdction = () => process.env.NODE_ENV === "production";
 
 export const fetchUrl =
   process.env.NODE_ENV === "development"
     ? "http://localhost:3000/api"
-    : "https://leofang.vercel.app/api";
+    : "https://fangdada.vercel.app/api";

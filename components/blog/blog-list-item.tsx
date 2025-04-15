@@ -6,7 +6,7 @@ import { BlogType } from "./blog-list";
 import { getDictionary } from "@/app/(root)/dictionaries";
 
 type BlogListItemProps = {
-  lang: string,
+  lang: 'en' | 'zh',
   blog: BlogType;
 };
 
