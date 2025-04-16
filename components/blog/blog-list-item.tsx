@@ -16,7 +16,7 @@ export const BlogListItem = async ({ lang, blog }: BlogListItemProps) => {
 
   return (
     <div className="bg-slate-50 p-3 rounded-sm shadow-md">
-      <Link href={`${dict.paths.site_blog.link}/${blog.slug}`} target="_blank" className="group">
+      <Link href={`${dict.paths.site_blog.link}/${blog.slug}`} className="group">
         <div className="relative rounded-sm transform overflow-hidden shadow-[0_2px_8px_rgba(15,23,42,0.08)] bg-slate-200">
           <Image
             src={blog.bgImgPath}

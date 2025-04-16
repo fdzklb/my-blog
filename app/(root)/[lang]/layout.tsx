@@ -1,11 +1,10 @@
-import type { Metadata } from "next";
 import * as React from "react";
 import { BackToTop } from "@/components/back-to-top";
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import "@/styles/global.css";
-
+import RouteTracker from "@/components/RouteTracker";
 export async function generateStaticParams() {
   return [{ lang: "en" }, { lang: "zh" }];
 }
@@ -29,6 +28,7 @@ export default async function RootLayout({
             <BackToTop />
           </>
         </TooltipProvider>
+        <RouteTracker />
       </body>
     </html>
   );

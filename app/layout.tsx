@@ -33,7 +33,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
           </TooltipProvider>
       </body>
       {isProdction() && <GoogleAnalytics gaId="G-V23LE3L362" />}
-
+      
     </html>
   );
 }

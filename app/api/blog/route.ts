@@ -15,9 +15,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   const { slug, title, categories, description, date } = await request.json();
-
-  console.log(slug, title, categories, description, date);
-
+  
   try {
     const existingPost = await db.blog.findUnique({
       where: { slug },

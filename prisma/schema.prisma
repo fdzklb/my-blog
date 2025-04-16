@@ -30,3 +30,11 @@ model Subscriber {
   is_subscribed   Boolean @default(true)
 }
 
+model visitor {
+  id          Int       @id @default(autoincrement())
+  ip          String
+  trackId     String    @unique
+  date        String
+  records     String    @default("[]")
+}
+
