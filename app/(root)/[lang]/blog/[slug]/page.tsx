@@ -61,7 +61,8 @@ export default async function Page(props: {
   params: { slug: string; lang: string };
 }) {
   const { slug, lang } = await props.params;
-  const dict = await getDictionary(lang)
+  // const dict = await getDictionary(lang)
+  const dict = await getDictionary('zh')
   const blog = await getBlogBySlug(decodeURI(slug) as string);
   const categories = blog.metadata.categories.split(';')
   const view_count = getBlogViewCountBySlug(decodeURI(slug) as string);
