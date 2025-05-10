@@ -14,10 +14,11 @@ export type BlogType = {
 
 type BlogListProps = {
   blogs: BlogType[];
-  lang: string;
+  lang: 'en' | 'zh';
+  site_url?: string;
 };
 
-export const BlogList = async ({ blogs, lang }: BlogListProps) => {
+export const BlogList = async ({ blogs, lang, site_url='site_blog' }: BlogListProps) => {
   if (!blogs.length) {
     return (
       <div className="grid place-content-center gap-8">
@@ -39,7 +40,7 @@ export const BlogList = async ({ blogs, lang }: BlogListProps) => {
             animationDelay: `${(idx + 1) * 200}ms`,
           }}
         >
-          <BlogListItem blog={el} lang={lang} />
+          <BlogListItem blog={el} lang={lang} site_url={site_url} />
         </li>
       ))}
     </ul>

@@ -3,7 +3,7 @@ import { getSortedBlogsMetaData } from "@/lib/resolveMarkdown";
 import { BlogList } from "@/components/blog/blog-list";
 
 export const revalidate = 60;
-export default async function Page({ params }: { params: { lang: string } }) {
+export default async function Page({ params }: { params: { lang: 'en' | 'zh' } }) {
 
   const { lang } = await params
   // 目前无英文博客

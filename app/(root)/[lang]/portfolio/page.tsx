@@ -1,7 +1,18 @@
-export default function PortfolioPage() {
+import { Wrapper } from "@/components/wrapper";
+import { getSortedBlogsMetaData } from "@/lib/resolveMarkdown";
+import { BlogList } from "@/components/blog/blog-list";
+
+export const revalidate = 60;
+export default async function Page({ params }: { params: { lang: 'zh' | 'en' } }) {
+
+  const { lang } = await params
+  // 目前无英文博客
+  const blogLists = lang === 'zh' ? getSortedBlogsMetaData('', 'articles/portfolio') : []
+  
   return (
-    <div className="relative grid md:h-[calc(100vh-64px)] place-content-center">
-      <p className="text-center text-xl">更新中.....</p>
-    </div>
+    <Wrapper className="flex flex-col px-6 pb-24 pt-8">
+      <h2 className="pb-8 text-3xl font-bold md:text-4xl">{lang === 'zh' ? '最新文章' : 'Latest Articles'}</h2>
+      <BlogList blogs={blogLists} lang={lang} site_url="site_portfolio" />
+    </Wrapper>
   );
 }

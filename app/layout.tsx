@@ -28,12 +28,9 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
         />
       </head>
       <body className="debug-screens overflow-x-clip scroll-smooth">
-         <TooltipProvider>
-            {children}
-          </TooltipProvider>
+        <TooltipProvider>{children}</TooltipProvider>
       </body>
       {isProdction() && <GoogleAnalytics gaId="G-V23LE3L362" />}
-      
     </html>
   );
 }

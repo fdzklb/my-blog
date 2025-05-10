@@ -14,7 +14,7 @@ export default function ReportViews({
   slug: string;
   title: string;
   description: string;
-  categories: string;
+  categories?: string;
   suffix: string;
   date: string;
 }) {
@@ -26,7 +26,7 @@ export default function ReportViews({
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ slug, title, categories, description, date }),
+          body: JSON.stringify({ slug, title, categories: categories || '', description, date }),
         });
       } catch (error) {
         console.log("Something is up...", error);

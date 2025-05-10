@@ -6,7 +6,7 @@
 
 使用 TypeScript 编写，提供类型安全性和更好的开发体验
 
-- 支持`中英`双语言语言
+- 支持`中英`双语言
 
 - 使用mdx构建博客内容
 
@@ -19,6 +19,8 @@
 - 使用 next-sitemap 生成全站 sitemap ，SEO 友好
 
 - 使用 ahooks 提升开发效率
+
+- 使用Navigator.sendBeacon 发送统计数据，记录访问者ip和访问足迹
 
 
 ## ✨ 预览

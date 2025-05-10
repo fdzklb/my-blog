@@ -30,7 +30,7 @@ export function MobileNavSheet({ items, header }: MobileNavSheetProps) {
           <MenuIcon className="size-4" />
         </Button>
       </SheetTrigger>
-      <SheetContent side="left">
+      <SheetContent side="left" className="w-[50vmin]">
         {header}
         <div className="grid gap-4 pt-8">
           {items.map((el) => (

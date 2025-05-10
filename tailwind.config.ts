@@ -19,10 +19,10 @@ export default {
       sm: "640px",
       // => @media (min-width: 640px) { ... }
 
-      md: "768px",
+      md: "768px", //Ipad min
       // => @media (min-width: 768px) { ... }
 
-      lg: "1024px",
+      lg: "1024px", //Ipad pro
       // => @media (min-width: 1024px) { ... }
 
       // 基础版心
@@ -33,6 +33,7 @@ export default {
 
       "2xl": "1440px",
       // => @media (min-width: 1440px) { ... }
+      "3xl": "1920px",
     },
     debugScreens: {
       position: ["bottom", "right"],

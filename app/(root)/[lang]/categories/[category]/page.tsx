@@ -13,7 +13,7 @@ export async function generateStaticParams() {
 }
 
 export default async function Page(props: {
-  params: { category: string, lang: string };
+  params: { category: string, lang: 'en' | 'zh' };
 }) {
   const { category, lang } = await props.params;
   const blogs = await getSortedBlogsMetaData(decodeURI(category) as string);

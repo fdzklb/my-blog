@@ -43,6 +43,7 @@ export default async function Page({ params }: { params: { lang: string } }) {
   let delay = 0;
 
   const userInfo = {
+
   }
 
   // 每次调用，增加延时
@@ -61,7 +62,7 @@ export default async function Page({ params }: { params: { lang: string } }) {
           <h2>我是谁</h2>
           <p>
             Hi~ 我是{dict.info.nickname}
-            ，一名前端开发工程师，2019年本科毕业，喜欢 Coding 和打游戏
+            ，一名前端开发工程师，2019年本科毕业，喜欢 Coding 和 网球
           </p>
         </div>
 

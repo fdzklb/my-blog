@@ -12,7 +12,7 @@ import path from "path";
 // import rehypePrettyCode from "rehype-pretty-code";
 
 const blogs = {
-  blogsDir: "blogLists",
+  blogsDir: "articles/blogLists",
 };
 
 type Metadata = {

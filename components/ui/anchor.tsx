@@ -113,7 +113,7 @@ const Anchor = React.forwardRef<
       <div className="flex justify-center">
         <div className="no-scrollbar h-full overflow-auto pb-10">
           <div className="space-y-2">
-            <ul className="m-0 list-none">{achorElement}</ul>
+            <ul className="m-0 list-none overflow-y-auto max-h-[500px]">{achorElement}</ul>
           </div>
         </div>
       </div>

@@ -11,7 +11,7 @@ import dayjs from "dayjs";
 // import InputComment from "@/components/comment-list/InputComment";
 import Anchor from "@/components/ui/anchor";
 import { WEBSITE } from "@/lib/constants";
-import { getBlogViewCountBySlug } from "@/db/actions/blog";
+import { getPortfolioViewCountBySlug } from "@/db/actions/blog";
 import { Eye } from "lucide-react";
 
 export const revalidate = 3600;
@@ -27,7 +27,7 @@ const weekMap = {
 };
 
 export async function generateStaticParams() {
-  let posts = await getSortedBlogsMetaData();
+  let posts = await getSortedBlogsMetaData('', 'articles/portfolio');
   return posts.map((blog: { slug: any }) => ({
     slug: blog.slug,
   }));
@@ -37,7 +37,7 @@ export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await props.params;
-  const blog = await getBlogBySlug(decodeURI(slug) as string);
+  const blog = await getBlogBySlug(decodeURI(slug) as string, 'articles/portfolio');
   const title = `${blog.metadata.title} - ${WEBSITE}`;
   const description = blog.metadata.description;
   return {
@@ -62,10 +62,9 @@ export default async function Page(props: {
 }) {
   const { slug, lang } = await props.params;
   // const dict = await getDictionary(lang)
-  const dict = await getDictionary("zh");
-  const blog = await getBlogBySlug(decodeURI(slug) as string);
-  const categories = blog.metadata.categories.split(";");
-  const view_count = getBlogViewCountBySlug(decodeURI(slug) as string);
+  // const dict = await getDictionary("zh");
+  const blog = await getBlogBySlug(decodeURI(slug) as string, 'articles/portfolio');
+  const view_count = getPortfolioViewCountBySlug(decodeURI(slug) as string);
   return (
     <>
       <ReportViews
@@ -73,8 +72,7 @@ export default async function Page(props: {
         title={blog.metadata.title}
         date={blog.metadata.date}
         description={blog.metadata.description}
-        categories={blog.metadata.categories}
-        suffix={"blog"}
+        suffix={"portfolio"}
       />
       {/* <script
         type="application/ld+json"
@@ -112,21 +110,6 @@ export default async function Page(props: {
             <Eye className="inline-block mr-1" />
               <span>{view_count || 1}</span>
           </p>
-          {categories.map((name: string) => (
-              <object key={name}>
-                <Link
-                  href={`${dict.paths.site_category.link}/${name}`}
-                  key={name}
-                >
-                  <div
-                    className={`flex items-center px-2 py-2 rounded-sm font-semibold text-xs/[6px]
-                      text-center text-white shadow-sm ${dict.categories[name]["color"]}`}
-                  >
-                    <span>{name.trim()}</span>
-                  </div>
-                </Link>
-              </object>
-            ))}
         </div>
         <article>
             <CustomMDX source={blog.content} />

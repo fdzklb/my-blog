@@ -24,6 +24,16 @@ model Blog {
   categories        String
 }
 
+model Portfolio {
+  id          Int       @id @default(autoincrement())
+  slug        String    @unique
+  title       String
+  view_count  Int       @default(1)
+  date        String
+  description String
+  categories        String
+}
+
 model Subscriber {
   id              Int     @id @default(autoincrement())
   email           String  @unique
