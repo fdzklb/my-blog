@@ -2,7 +2,7 @@ import * as React from "react";
 import { getDictionary } from "@/app/(root)/dictionaries";
 
 
-export async function generateMetadata({ params }: { params: { lang: string } }) {
+export async function generateMetadata({ params }: { params: { lang: 'zh' | 'en' } }) {
   const { lang } = await params;
   const dict = await getDictionary(lang);
   return {

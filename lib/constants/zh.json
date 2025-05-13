@@ -41,7 +41,32 @@
     "前端": {
       "href": "/zh/categories/前端",
       "color": "bg-cyan-500",
+      "description": "关于前端开发的一切"
+    },
+    "HTTP": {
+      "href": "/zh/categories/HTTP",
+      "color": "bg-[#52616B]",
       "description": "Learn React.js and Next.js in a simple to understand articles"
+    },
+    "CSS": {
+      "href": "/zh/categories/CSS",
+      "color": "bg-[#D59BF6]",
+      "description": "CSS"
+    },
+    "性能优化": {
+      "href": "/zh/categories/性能优化",
+      "color": "bg-[#355C7D]",
+      "description": "前端性能优化"
+    },
+    "浏览器插件": {
+      "href": "/zh/categories/浏览器插件",
+      "color": "bg-[#FFAAA5]",
+      "description": "浏览器V3版本插件开发"
+    },
+    "Node": {
+      "href": "/zh/categories/Node",
+      "color": "bg-[#FF677D]",
+      "description": "Node"
     },
     "思考": {
       "href": "/zh/categories/思考",

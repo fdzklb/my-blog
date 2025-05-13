@@ -4,7 +4,7 @@ import { getDictionary } from "@/app/(root)/dictionaries";
 export async function generateMetadata({
   params,
 }: {
-  params: { lang: string };
+  params: { lang: 'zh' | 'en' };
 }) {
   const { lang } = await params;
   const dict = await getDictionary(lang);

@@ -64,7 +64,7 @@ export default async function Page(props: {
   // const dict = await getDictionary(lang)
   const dict = await getDictionary("zh");
   const blog = await getBlogBySlug(decodeURI(slug) as string);
-  const categories = blog.metadata.categories.split(";");
+  const categories = blog.metadata.categories.split(",");
   const view_count = getBlogViewCountBySlug(decodeURI(slug) as string);
   return (
     <>
@@ -73,7 +73,7 @@ export default async function Page(props: {
         title={blog.metadata.title}
         date={blog.metadata.date}
         description={blog.metadata.description}
-        categories={blog.metadata.categories}
+        categories={JSON.stringify(blog.metadata.categories)}
         suffix={"blog"}
       />
       {/* <script

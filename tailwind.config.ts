@@ -13,7 +13,9 @@ export default {
     "./src/**/*.{ts,tsx}",
     "./lib/**/*.{ts,tsx}",
   ],
-  safelist: ["bg-cyan-500", "bg-[#9273f9]", "bg-[#fcc31f]", "bg-[#50d71e]"],
+  safelist: ["bg-cyan-500", "bg-[#9273f9]", "bg-[#fcc31f]", "bg-[#50d71e]", "bg-[#52616B]",
+    "bg-[#355C7D]", "bg-[#FFAAA5]", "bg-[#D59BF6]", "bg-[#FF677D]"
+  ],
   theme: {
     screens: {
       sm: "640px",

@@ -16,12 +16,13 @@ export default async function Page(props: {
   params: { category: string, lang: 'en' | 'zh' };
 }) {
   const { category, lang } = await props.params;
-  const blogs = await getSortedBlogsMetaData(decodeURI(category) as string);
+  const blogLists = lang === 'zh' ? await getSortedBlogsMetaData(decodeURI(category) as string) : []
+
 
   return (
     <Wrapper className="flex flex-col px-6 pb-24 pt-8">
       <h2 className="pb-8 text-3xl font-bold md:text-4xl">{decodeURI(category)}</h2>
-      <BlogList blogs={blogs} lang={lang} />
+      <BlogList blogs={blogLists} lang={lang} />
     </Wrapper>
   );
 }

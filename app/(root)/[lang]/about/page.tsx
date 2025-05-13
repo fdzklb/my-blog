@@ -37,14 +37,10 @@ import { SocialMediaList } from "@/components/home";
 import { getDictionary } from "@/app/(root)/dictionaries";
 export const revalidate = 60;
 
-export default async function Page({ params }: { params: { lang: string } }) {
+export default async function Page({ params }: { params: { lang: 'en' | 'zh' } }) {
   const { lang } = await params
   const dict = await getDictionary(lang)
   let delay = 0;
-
-  const userInfo = {
-
-  }
 
   // 每次调用，增加延时
   const getDelay = () => (delay += 200);
@@ -53,13 +49,17 @@ export default async function Page({ params }: { params: { lang: string } }) {
     <div className="flex w-full flex-col justify-center px-6 pb-24 pt-8">
       <section className="w-screen-wrapper prose prose-neutral mx-auto max-w-screen-wrapper dark:prose-invert">
         <h2 className="text-3xl font-bold md:text-4xl">关于</h2>
+        <Link
+          href="/blog/个人简历"
+          className="mb-4 flex items-center text-lg font-bold text-blue-500 hover:text-blue-600"
+        >个人简历</Link>
         <div
           className="animate-fade-up animate-ease-in-out"
           style={{
             animationDelay: `${getDelay()}ms`,
           }}
         >
-          <h2>我是谁</h2>
+          <h2>个人简介</h2>
           <p>
             Hi~ 我是{dict.info.nickname}
             ，一名前端开发工程师，2019年本科毕业，喜欢 Coding 和 网球
@@ -93,18 +93,15 @@ export default async function Page({ params }: { params: { lang: string } }) {
               <IconSkillTypeScript className="mx-1 translate-y-0.5" />
               TypeScript +
               <>
-                <IconSkillReactDark className="mx-1 translate-y-0.5 dark:hidden" />
-                <IconSkillReactLight className="mx-1 hidden translate-y-0.5 dark:inline-block" />
+                <IconSkillReactDark className="mx-1 translate-y-0.5" />
               </>
               React +
               <>
-                <IconSkillNextjsDark className="mx-1 translate-y-0.5 dark:hidden" />
-                <IconSkillNextjsLight className="mx-1 hidden translate-y-0.5 dark:inline-block" />
+                <IconSkillNextjsDark className="mx-1 translate-y-0.5" />
               </>
               Next.js + ahooks +
               <>
-                <IconSkillTailwindcssDark className="mx-1 translate-y-0.5 dark:hidden" />
-                <IconSkillTailwindcssLight className="mx-1 hidden translate-y-0.5 dark:inline-block" />
+                <IconSkillTailwindcssDark className="mx-1 translate-y-0.5" />
               </>
               Tailwind CSS，熟练使用
             </li>
@@ -120,7 +117,6 @@ export default async function Page({ params }: { params: { lang: string } }) {
           <ul>
             <li>
               <>
-                <IconSkillNodejsDark className="mx-1 translate-y-0.5 dark:hidden" />
                 <IconSkillNodejsLight className="mx-1 hidden translate-y-0.5 dark:inline-block" />
               </>
               Node.js，能简单 CRUD 水平
